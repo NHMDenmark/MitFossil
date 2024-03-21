@@ -1,0 +1,488 @@
+.mit-resource {
+    box-sizing: border-box;
+    line-height: 1.42;
+    height: 100%;
+    outline: none;
+    overflow-y: auto;
+    padding: 12px 15px;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -moz-tab-size: 4;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.mit-resource > * {
+    cursor: text;
+}
+.mit-resource, .mit-resource p{
+    font-size: 14px; 
+}
+@media(min-width:768px){
+    .mit-resource, .mit-resource p{
+        font-size: 16px;
+    }
+}
+.mit-resource blockquote,
+.mit-resource h1,
+.mit-resource h2,
+.mit-resource h3,
+.mit-resource h4,
+.mit-resource h5,
+.mit-resource h6,
+.mit-resource ol,
+.mit-resource p,
+.mit-resource pre,
+.mit-resource ul {
+    margin: 0;
+    padding: 0;
+    margin-bottom: .5rem;
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.mit-resource ol,
+.mit-resource ul {
+    padding-left: 1.5em;
+}
+.mit-resource ol > li,
+.mit-resource ul > li {
+    list-style-type: none;
+}
+.mit-resource ul > li:before {
+    content: "\2022";
+}
+.mit-resource ul[data-checked="false"],
+.mit-resource ul[data-checked="true"] {
+    pointer-events: none;
+}
+.mit-resource ul[data-checked="false"] > li *,
+.mit-resource ul[data-checked="true"] > li * {
+    pointer-events: all;
+}
+.mit-resource ul[data-checked="false"] > li:before,
+.mit-resource ul[data-checked="true"] > li:before {
+    color: #777;
+    cursor: pointer;
+    pointer-events: all;
+}
+.mit-resource ul[data-checked="true"] > li:before {
+    content: "\2611";
+}
+.mit-resource ul[data-checked="false"] > li:before {
+    content: "\2610";
+}
+.mit-resource li:before {
+    display: inline-block;
+    white-space: nowrap;
+    width: 1.2em;
+}
+.mit-resource li:not(.ql-direction-rtl):before {
+    margin-left: -1.5em;
+    margin-right: 0.3em;
+    text-align: right;
+}
+.mit-resource li.ql-direction-rtl:before {
+    margin-left: 0.3em;
+    margin-right: -1.5em;
+}
+.mit-resource ol li:not(.ql-direction-rtl),
+.mit-resource ul li:not(.ql-direction-rtl) {
+    padding-left: 1.5em;
+}
+.mit-resource ol li.ql-direction-rtl,
+.mit-resource ul li.ql-direction-rtl {
+    padding-right: 1.5em;
+}
+.mit-resource ol li {
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    counter-increment: list-0;
+}
+.mit-resource ol li:before {
+    content: counter(list-0, decimal) ". ";
+}
+.mit-resource ol li.ql-indent-1 {
+    counter-increment: list-1;
+}
+.mit-resource ol li.ql-indent-1:before {
+    content: counter(list-1, lower-alpha) ". ";
+}
+.mit-resource ol li.ql-indent-1 {
+    counter-reset: list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.mit-resource ol li.ql-indent-2 {
+    counter-increment: list-2;
+}
+.mit-resource ol li.ql-indent-2:before {
+    content: counter(list-2, lower-roman) ". ";
+}
+.mit-resource ol li.ql-indent-2 {
+    counter-reset: list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.mit-resource ol li.ql-indent-3 {
+    counter-increment: list-3;
+}
+.mit-resource ol li.ql-indent-3:before {
+    content: counter(list-3, decimal) ". ";
+}
+.mit-resource ol li.ql-indent-3 {
+    counter-reset: list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.mit-resource ol li.ql-indent-4 {
+    counter-increment: list-4;
+}
+.mit-resource ol li.ql-indent-4:before {
+    content: counter(list-4, lower-alpha) ". ";
+}
+.mit-resource ol li.ql-indent-4 {
+    counter-reset: list-5 list-6 list-7 list-8 list-9;
+}
+.mit-resource ol li.ql-indent-5 {
+    counter-increment: list-5;
+}
+.mit-resource ol li.ql-indent-5:before {
+    content: counter(list-5, lower-roman) ". ";
+}
+.mit-resource ol li.ql-indent-5 {
+    counter-reset: list-6 list-7 list-8 list-9;
+}
+.mit-resource ol li.ql-indent-6 {
+    counter-increment: list-6;
+}
+.mit-resource ol li.ql-indent-6:before {
+    content: counter(list-6, decimal) ". ";
+}
+.mit-resource ol li.ql-indent-6 {
+    counter-reset: list-7 list-8 list-9;
+}
+.mit-resource ol li.ql-indent-7 {
+    counter-increment: list-7;
+}
+.mit-resource ol li.ql-indent-7:before {
+    content: counter(list-7, lower-alpha) ". ";
+}
+.mit-resource ol li.ql-indent-7 {
+    counter-reset: list-8 list-9;
+}
+.mit-resource ol li.ql-indent-8 {
+    counter-increment: list-8;
+}
+.mit-resource ol li.ql-indent-8:before {
+    content: counter(list-8, lower-roman) ". ";
+}
+.mit-resource ol li.ql-indent-8 {
+    counter-reset: list-9;
+}
+.mit-resource ol li.ql-indent-9 {
+    counter-increment: list-9;
+}
+.mit-resource ol li.ql-indent-9:before {
+    content: counter(list-9, decimal) ". ";
+}
+.mit-resource .ql-indent-1:not(.ql-direction-rtl) {
+    padding-left: 3em;
+}
+.mit-resource li.ql-indent-1:not(.ql-direction-rtl) {
+    padding-left: 4.5em;
+}
+.mit-resource .ql-indent-1.ql-direction-rtl.ql-align-right {
+    padding-right: 3em;
+}
+.mit-resource li.ql-indent-1.ql-direction-rtl.ql-align-right {
+    padding-right: 4.5em;
+}
+.mit-resource .ql-indent-2:not(.ql-direction-rtl) {
+    padding-left: 6em;
+}
+.mit-resource li.ql-indent-2:not(.ql-direction-rtl) {
+    padding-left: 7.5em;
+}
+.mit-resource .ql-indent-2.ql-direction-rtl.ql-align-right {
+    padding-right: 6em;
+}
+.mit-resource li.ql-indent-2.ql-direction-rtl.ql-align-right {
+    padding-right: 7.5em;
+}
+.mit-resource .ql-indent-3:not(.ql-direction-rtl) {
+    padding-left: 9em;
+}
+.mit-resource li.ql-indent-3:not(.ql-direction-rtl) {
+    padding-left: 10.5em;
+}
+.mit-resource .ql-indent-3.ql-direction-rtl.ql-align-right {
+    padding-right: 9em;
+}
+.mit-resource li.ql-indent-3.ql-direction-rtl.ql-align-right {
+    padding-right: 10.5em;
+}
+.mit-resource .ql-indent-4:not(.ql-direction-rtl) {
+    padding-left: 12em;
+}
+.mit-resource li.ql-indent-4:not(.ql-direction-rtl) {
+    padding-left: 13.5em;
+}
+.mit-resource .ql-indent-4.ql-direction-rtl.ql-align-right {
+    padding-right: 12em;
+}
+.mit-resource li.ql-indent-4.ql-direction-rtl.ql-align-right {
+    padding-right: 13.5em;
+}
+.mit-resource .ql-indent-5:not(.ql-direction-rtl) {
+    padding-left: 15em;
+}
+.mit-resource li.ql-indent-5:not(.ql-direction-rtl) {
+    padding-left: 16.5em;
+}
+.mit-resource .ql-indent-5.ql-direction-rtl.ql-align-right {
+    padding-right: 15em;
+}
+.mit-resource li.ql-indent-5.ql-direction-rtl.ql-align-right {
+    padding-right: 16.5em;
+}
+.mit-resource .ql-indent-6:not(.ql-direction-rtl) {
+    padding-left: 18em;
+}
+.mit-resource li.ql-indent-6:not(.ql-direction-rtl) {
+    padding-left: 19.5em;
+}
+.mit-resource .ql-indent-6.ql-direction-rtl.ql-align-right {
+    padding-right: 18em;
+}
+.mit-resource li.ql-indent-6.ql-direction-rtl.ql-align-right {
+    padding-right: 19.5em;
+}
+.mit-resource .ql-indent-7:not(.ql-direction-rtl) {
+    padding-left: 21em;
+}
+.mit-resource li.ql-indent-7:not(.ql-direction-rtl) {
+    padding-left: 22.5em;
+}
+.mit-resource .ql-indent-7.ql-direction-rtl.ql-align-right {
+    padding-right: 21em;
+}
+.mit-resource li.ql-indent-7.ql-direction-rtl.ql-align-right {
+    padding-right: 22.5em;
+}
+.mit-resource .ql-indent-8:not(.ql-direction-rtl) {
+    padding-left: 24em;
+}
+.mit-resource li.ql-indent-8:not(.ql-direction-rtl) {
+    padding-left: 25.5em;
+}
+.mit-resource .ql-indent-8.ql-direction-rtl.ql-align-right {
+    padding-right: 24em;
+}
+.mit-resource li.ql-indent-8.ql-direction-rtl.ql-align-right {
+    padding-right: 25.5em;
+}
+.mit-resource .ql-indent-9:not(.ql-direction-rtl) {
+    padding-left: 27em;
+}
+.mit-resource li.ql-indent-9:not(.ql-direction-rtl) {
+    padding-left: 28.5em;
+}
+.mit-resource .ql-indent-9.ql-direction-rtl.ql-align-right {
+    padding-right: 27em;
+}
+.mit-resource li.ql-indent-9.ql-direction-rtl.ql-align-right {
+    padding-right: 28.5em;
+}
+.mit-resource .ql-video {
+    display: block;
+    max-width: 100%;
+}
+.mit-resource .ql-video.ql-align-center {
+    margin: 0 auto;
+}
+.mit-resource .ql-video.ql-align-right {
+    margin: 0 0 0 auto;
+}
+.mit-resource .ql-bg-black {
+    background-color: #000;
+}
+.mit-resource .ql-bg-red {
+    background-color: #e60000;
+}
+.mit-resource .ql-bg-orange {
+    background-color: #f90;
+}
+.mit-resource .ql-bg-yellow {
+    background-color: #ff0;
+}
+.mit-resource .ql-bg-green {
+    background-color: #008a00;
+}
+.mit-resource .ql-bg-blue {
+    background-color: #06c;
+}
+.mit-resource .ql-bg-purple {
+    background-color: #93f;
+}
+.mit-resource .ql-color-white {
+    color: #fff;
+}
+.mit-resource .ql-color-red {
+    color: #e60000;
+}
+.mit-resource .ql-color-orange {
+    color: #f90;
+}
+.mit-resource .ql-color-yellow {
+    color: #ff0;
+}
+.mit-resource .ql-color-green {
+    color: #008a00;
+}
+.mit-resource .ql-color-blue {
+    color: #06c;
+}
+.mit-resource .ql-color-purple {
+    color: #93f;
+}
+.mit-resource .ql-font-serif {
+    font-family: Georgia, Times New Roman, serif;
+}
+.mit-resource .ql-font-monospace {
+    font-family: Monaco, Courier New, monospace;
+}
+.mit-resource .ql-size-small {
+    font-size: 0.75em;
+}
+.mit-resource .ql-size-large {
+    font-size: 1.5em;
+}
+.mit-resource .ql-size-huge {
+    font-size: 2.5em;
+}
+.mit-resource .ql-direction-rtl {
+    direction: rtl;
+    text-align: inherit;
+}
+.mit-resource .ql-align-center {
+    text-align: center;
+}
+.mit-resource .ql-align-justify {
+    text-align: justify;
+}
+.mit-resource .ql-align-right {
+    text-align: right;
+}
+.mit-resource.ql-blank:before {
+    color: rgba(0, 0, 0, 0.6);
+    content: attr(data-placeholder);
+    font-style: italic;
+    left: 15px;
+    pointer-events: none;
+    position: absolute;
+    right: 15px;
+}
+
+.mit-resource .ql-hidden {
+    display: none;
+}
+.mit-resource .ql-out-bottom,
+.mit-resource .ql-out-top {
+    visibility: hidden;
+}
+.mit-resource .ql-formats {
+    display: inline-block;
+    vertical-align: middle;
+}
+.mit-resource .ql-formats:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+.mit-resource .ql-stroke {
+    fill: none;
+    stroke: #444;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+.mit-resource .ql-stroke-miter {
+    fill: none;
+    stroke: #444;
+    stroke-miterlimit: 10;
+    stroke-width: 2;
+}
+.mit-resource .ql-fill,
+.mit-resource .ql-stroke.ql-fill {
+    fill: #444;
+}
+.mit-resource .ql-empty {
+    fill: none;
+}
+.mit-resource .ql-even {
+    fill-rule: evenodd;
+}
+.mit-resource .ql-stroke.ql-thin,
+.mit-resource .ql-thin {
+    stroke-width: 1;
+}
+.mit-resource .ql-transparent {
+    opacity: 0.4;
+}
+.mit-resource .ql-direction svg:last-child {
+    display: none;
+}
+.mit-resource .ql-direction.ql-active svg:last-child {
+    display: inline;
+}
+.mit-resource .ql-direction.ql-active svg:first-child {
+    display: none;
+}
+.mit-resource h1 {
+    font-size: 2em;
+}
+.mit-resource h2 {
+    font-size: 1.5em;
+}
+.mit-resource h3 {
+    font-size: 1.17em;
+}
+.mit-resource h4 {
+    font-size: 1em;
+}
+.mit-resource h5 {
+    font-size: 0.83em;
+}
+.mit-resource h6 {
+    font-size: 0.67em;
+}
+.mit-resource a {
+    text-decoration: underline;
+    font-size: inherit;
+    color: inherit;
+}
+.mit-resource a:hover {
+    color: #51726B;
+}
+.mit-resource blockquote {
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}
+.mit-resource code,
+.mit-resource pre {
+    background-color: #f0f0f0;
+    border-radius: 3px;
+}
+.mit-resource pre {
+    white-space: pre-wrap;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+}
+.mit-resource code {
+    font-size: 85%;
+    padding: 2px 4px;
+}
+.mit-resource pre.ql-syntax {
+    background-color: #23241f;
+    color: #f8f8f2;
+    overflow: visible;
+}
+.mit-resource img{
+    max-width: 100%;
+    margin: 10px 0;
+}
