@@ -51,8 +51,7 @@ const onDeleteComment = async (data, index) => {
                         <div class="p-4">
                             <div class="row">
                                 <div class="col">
-                                    <img class="comment-picture" :src="getImage( user )" alt="fossil">
-                                    <strong class="comment-author fw-600 c-dark-green ms-3">
+                                    <strong class="comment-author fw-600 c-dark-green">
                                         {{ user?.username ?? $t('general.anonymous') }}
                                     </strong>
                                 </div>
@@ -75,8 +74,7 @@ const onDeleteComment = async (data, index) => {
                 <div v-if="index === 0 || (index > 0 && showMore)" class="row py-3">
                     <div class="row">
                         <div class="col d-flex align-items-center">
-                            <img class="comment-picture" :src="getImage( item.user )" alt="fossil">
-                            <strong class="comment-author fw-600 ms-3">{{ item.user.username ?? $t('general.anonymous') }}</strong>
+                            <strong class="comment-author fw-600">{{ item.user.username ?? $t('general.anonymous') }}</strong>
                         </div>
                     </div>
                     <div class="row mt-3">

@@ -22,9 +22,6 @@ class ProfileUpdateRequest extends ImageRequest
         $validations = [
             'name' => ['string', 'max:255'],
             'username' => ['string', 'max:32', Rule::unique(User::class)->ignore($this->user()->id)],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'zip_code' => ['numeric'],
-            'year_birth' => ['numeric'],
         ];
 
         if($this->user()->role === 'curator') {

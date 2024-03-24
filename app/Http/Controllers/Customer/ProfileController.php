@@ -38,7 +38,6 @@ class ProfileController extends Controller
 
         return Inertia::render('Customer/Profile/Edit', [
             'myCollections' => $myCollections,
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'copyright_rules' => $copyright_rules,
             'fossil' => $fossil,
@@ -53,19 +52,6 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
-        $images = $request->guardarFoto('picture', '/images', $request->user()->picture);
-
-        if(is_array($images)) {
-            $request->user()->picture = $images[0];
-        }
-
-        if($request->picture == 'empty') {
-            $request->user()->picture = null;
-        }
-        
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
         $request->user()->save();
 
         return Redirect::route('customer.profile.edit');

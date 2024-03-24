@@ -17,23 +17,15 @@ class UserAdminRequest extends ImageRequest
             }
 
             return [
-                'name' => 'required|string|max:255',
                 'username' => ['required', 'string', 'max:32', Rule::unique(User::class)->ignore($id)],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore($id)],
                 'password' => ['confirmed'],
                 'role' => ['required', 'string'],
-                'zip_code' => ['numeric'],
-                'year_birth' => ['numeric'],
             ];
         } else {
             return [
-                'name' => 'required|string|max:255',
                 'username' => 'required|string|max:32|unique:'.User::class,
-                'email' => 'required|string|email|max:255|unique:'.User::class,
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'role' => ['required', 'string'],
-                'zip_code' => ['numeric'],
-                'year_birth' => ['numeric'],
             ];
         }
     }

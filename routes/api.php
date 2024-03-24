@@ -36,7 +36,7 @@ Route::group(['prefix' => 'customer', 'as' => 'api.customer.'], function () {
     Route::post('/fossil/users-votes', [\App\Http\Controllers\Api\Customer\FossilApiController::class, 'users_votes'])->name('fossil.users-votes');
 });
 
-Route::group(['prefix' => 'customer', 'as' => 'api.customer.', 'middleware' => ['auth:sanctum', 'verified', 'role:customer,curator,admin']], function () {
+Route::group(['prefix' => 'customer', 'as' => 'api.customer.', 'middleware' => ['auth:sanctum', 'role:customer,curator,admin']], function () {
     Route::get('/user/state', [\App\Http\Controllers\Api\Customer\UserApiController::class, 'state'])->name('user.state');
 
     Route::post('/notification/notify', [\App\Http\Controllers\Api\NotificationApiController::class, 'notify'])->name('notification.notify');

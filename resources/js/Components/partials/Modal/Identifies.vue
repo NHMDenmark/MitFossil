@@ -47,11 +47,11 @@ async function onInputCustomer(checked, item, index) {
     if(checked) {
         const data = props.fossil.fossil_identifies[index].vote_data;
         if(data?.users) {
-            data.users.push({ name: user.name, username: user.username, email: user.email })
+            data.users.push({ username: user.username })
         } else {
             props.fossil.fossil_identifies[index].vote_data = {
                 id: item.id,
-                users: [ { name: user.name, username: user.username, email: user.email } ]
+                users: [ { username: user.username } ]
             }
         }
     } else {

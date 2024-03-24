@@ -8,7 +8,7 @@ import { Head, useForm } from '@inertiajs/vue3';
 import InputTextInline from "@/Components/InputTextInline.vue";
 
 const props = defineProps({
-    email: {
+    username: {
         type: String,
         required: true,
     },
@@ -20,7 +20,7 @@ const props = defineProps({
 
 const form = useForm({
     token: props.token,
-    email: props.email,
+    username: props.username,
     password: '',
     password_confirmation: '',
 });
@@ -38,8 +38,8 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div class="form-group mt-4">
-                <InputTextInline name="email" v-model="form.email" :label="$t('form.email_2')" />
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputTextInline name="username" v-model="form.username" :label="$t('form.username')" />
+                <InputError class="mt-2" :message="form.errors.username" />
             </div>
 
             <div class="form-group mt-4">

@@ -32,16 +32,11 @@ class UsersController extends Controller
     }
 
     function store(UserAdminRequest $request) : RedirectResponse {
+
         User::create([
-            'name' => $request->name,
             'username' => $request->username,
-            'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
-            'zip_code' => $request->zip_code,
-            'year_birth' => $request->year_birth,
-            'picture' => $request->guardarFoto('picture', '/images', null),
-            'email_verified_at' => Carbon::now()
+            'role' => trim($request->role),
         ]);
 
         return Redirect::route('admin.users.index');
@@ -55,11 +50,9 @@ class UsersController extends Controller
 
     function update(UserAdminRequest $request, $id) : RedirectResponse {
         $user = User::findOrFail($id);
-        $picture = $user->picture;
         $password = $user->password;
 
         $user->fill($request->validated());
-        $user->picture = $request->guardarFoto('picture', '/images', $picture);
 
         if (Functions::hasValue($user->password) && $user->isDirty('password')) {
             $user->password = Hash::make($request->password);
@@ -75,22 +68,10 @@ class UsersController extends Controller
     function destroy(Request $request){
         $user = User::findOrFail($request->id);
 
-        $user->email = null;
         $user->username = null;
-        $user->email_verified_at = null;
         $user->password = null;
         $user->remember_token = null;
         $user->active = false;
-
-        if($user->picture) {
-            $path = storage_path('app/public') . str_replace('/storage','', $user->picture);
-            if(is_file($path)) {
-                unlink($path);
-            }
-        }
-
-        $user->picture = null;
-        $user->name = __('auth.anonymus');
 
         $user->save();
     }

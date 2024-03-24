@@ -141,7 +141,7 @@ class Fossil extends Model
         $query = self::query()
             ->with('user', function (BelongsTo $q){
                 return $q
-                    ->select('id', 'name', 'email', 'copyright_rule_id', 'username');
+                    ->select('id', 'copyright_rule_id', 'username');
             })
             ->with('images')
             ->with('country')
@@ -151,18 +151,18 @@ class Fossil extends Model
             ->with('fossil_identifies', function (HasMany $q){
                 return $q
                     ->with('user', function (BelongsTo $q2){
-                        return $q2->select('id', 'name', 'username');
+                        return $q2->select('id', 'username');
                     })->with('vote_curator_user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'username');
+                    return $q2->select('id', 'username');
                 });
             })
             ->with('fossil_comments', function (HasMany $q) {
                 return $q->with('user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'picture', 'username');
+                    return $q2->select('id', 'username');
                 })->orderByDesc('created_at');
             })
             ->with('vote_scientific_user', function (BelongsTo $q){
-                return $q->select('id', 'name', 'email', 'username');
+                return $q->select('id', 'username');
             })
             ->with('eon')
             ->with('era')
@@ -214,7 +214,7 @@ class Fossil extends Model
         $query = self::query()
             ->with('user', function (BelongsTo $q) use ($options){
                 return $q
-                    ->select('id', 'name', 'email', 'copyright_rule_id', 'username');
+                    ->select('id', 'copyright_rule_id', 'username');
             })
             ->with('images')
             ->with('country')
@@ -222,18 +222,18 @@ class Fossil extends Model
             ->with('copyright_rule')
             ->with('fossil_identifies', function (HasMany $q) {
                 return $q->with('user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'email', 'username');
+                    return $q2->select('id', 'username');
                 })->with('vote_curator_user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'email', 'username');
+                    return $q2->select('id', 'username');
                 });
             })
             ->with('fossil_comments', function (HasMany $q) {
                 return $q->with('user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'picture', 'username');
+                    return $q2->select('id', 'username');
                 })->orderByDesc('created_at');;
             })
             ->with('vote_scientific_user', function (BelongsTo $q){
-                return $q->select('id', 'name', 'email', 'copyright_rule_id', 'username');
+                return $q->select('id', 'copyright_rule_id', 'username');
             })
             ->with('fossil_identify')
             ->with('eon')
@@ -271,8 +271,8 @@ class Fossil extends Model
                     }
                     return $q;
                 })
-                ->orWhereHas('user', function ($q) use ($options){
-                    return $q->where('name', 'like', '%'. $options["search"] . '%');
+                ->orWhereHas('username', function ($q) use ($options){
+                    return $q->where('username', 'like', '%'. $options["search"] . '%');
                 })
                 ->orWhereHas('country', function ($q) use ($options){
                     return $q->where('description', 'like', '%'. $options["search"] . '%');
@@ -512,9 +512,9 @@ class Fossil extends Model
     public static function getFossil($id) {
         $query = self::query()
             ->with('user', function (BelongsTo $q){
-                return $q->select('id', 'name', 'email', 'username');
+                return $q->select('id', 'username');
             })->with('vote_scientific_user', function (BelongsTo $q){
-                return $q->select('id', 'name', 'email', 'username');
+                return $q->select('id', 'username');
             })
             ->with('images')
             ->with('country')
@@ -523,14 +523,14 @@ class Fossil extends Model
             ->with('copyright_rule')
             ->with('fossil_identifies', function (HasMany $q){
                 return $q->with('user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'email', 'username');
+                    return $q2->select('id', 'username');
                 })->with('vote_curator_user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'email', 'username');
+                    return $q2->select('id', 'username');
                 });
             })
             ->with('fossil_comments', function (HasMany $q) {
                 return $q->with('user', function (BelongsTo $q2){
-                    return $q2->select('id', 'name', 'picture', 'username');
+                    return $q2->select('id', 'username');
                 })->orderByDesc('created_at');;
             })
             ->with('eon')

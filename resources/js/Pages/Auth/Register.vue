@@ -11,17 +11,13 @@ import InputImage from "@/Components/InputImage.vue";
 const submited = ref(false);
 
 const form = useForm({
-    name: '',
     username: '',
     email: '',
     password: '',
     password_confirmation: '',
     copyright_rule_id: 3,
-    picture: null,
     terms: false,
     usage: false,
-    zip_code: null,
-    year_birth: null,
 });
 
 const submit = () => {
@@ -47,10 +43,6 @@ const submit = () => {
         </p>
 
         <form @submit.prevent="submit" class="mt-5 w-100 max-w-500 mb-0">
-            <div class="form-group">
-                <InputTextInline name="name" v-model="form.name" :label="$t('form.name')" />
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
 
             <div class="form-group mt-4">
                 <InputTextInline name="username" v-model="form.username" :label="$t('form.username')" />
@@ -70,29 +62,7 @@ const submit = () => {
             <div class="form-group mt-4">
                 <InputTextInline name="password_confirmation" v-model="form.password_confirmation" :label="$t('form.repeat_password')" type="password" />
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div class="form-group mt-4">
-                <InputTextInline name="zip_code" v-model="form.zip_code" :label="$t('form.zip_code')" />
-                <InputError class="mt-2" :message="form.errors.zip_code" />
-            </div>
-
-            <div class="form-group mt-4">
-                <InputTextInline name="year_birth" v-model="form.year_birth" :label="$t('form.year_birth')" />
-                <InputError class="mt-2" :message="form.errors.year_birth" />
-            </div>            
-
-            <div class="form-group mt-4 register-picture">
-                <div class="edit-picture">
-                    <InputImage
-                        id="picture"
-                        class="m-auto"
-                        :options="{ ratio: '1:1', size: '1000, 1000' }"
-                        v-model="form.picture"
-                        required />
-                    <InputLabel for="picture" :value="$t('form.upload_profile_picture')" />
-                </div>
-            </div>
+            </div>   
 
             <div class="accordion accordion-flush register-accordion" id="accordionUpload">
                 <div class="accordion-item">

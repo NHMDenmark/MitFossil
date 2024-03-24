@@ -41,7 +41,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $field_type = filter_var($this->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $field_type = 'username';
 
         if (!Auth::attempt([$field_type => $this->username, 'password' => $this->password, 'active' => true], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
@@ -70,7 +70,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'username' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -82,6 +82,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('username')).'|'.$this->ip());
     }
 }

@@ -22,7 +22,7 @@ use App\Http\Controllers\WelcomeController;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
-Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['verified']], function () {
+Route::group(['prefix' => '', 'as' => 'customer.'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/identify-finds', [\App\Http\Controllers\Customer\IdentifyFindsController::class, 'index'])->name('identify-finds');
     Route::get('/resources', [\App\Http\Controllers\Customer\ResourceController::class, 'index'])->name('resources');
@@ -36,7 +36,7 @@ Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['verified']]
     Route::get('/fossil-catalogue', [\App\Http\Controllers\Customer\EMuseumController::class, 'map'])->name('e-museum.map');
 });
 
-Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'verified']], function () {
+Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth']], function () {
     Route::get('/notifications', [\App\Http\Controllers\Customer\NotificationsController::class, 'index'])->name('notifications');
     Route::put('/notifications/update/{notification}', [\App\Http\Controllers\Customer\NotificationsController::class, 'update'])->name('notifications.update');
 
@@ -45,7 +45,7 @@ Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'ver
     Route::put('/update-fossil/{fossil}', [\App\Http\Controllers\Customer\NewFossilController::class, 'update'])->name('new-fossil.update');
 });
 
-Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'verified', 'role:customer,curator']], function () {
+Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'role:customer,curator']], function () {
     Route::get('/my-collection', [\App\Http\Controllers\Customer\CollectionsController::class, 'index'])->name('my-collection');
     Route::get('/new-fossil', [\App\Http\Controllers\Customer\NewFossilController::class, 'index'])->name('new-fossil');
     Route::post('/new-fossil', [\App\Http\Controllers\Customer\NewFossilController::class, 'store'])->name('new-fossil.store');

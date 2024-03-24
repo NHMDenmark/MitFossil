@@ -12,12 +12,6 @@
                         <p class="c-grey">{{ $t('pages.my_stats.curator_graded_fossils_text') }}: {{ stats?.myCuratedUploads }}</p>
                     </template>
                 </div>
-                <div class="col-12 col-sm-6 d-flex align-items-center justify-content-sm-end py-3">
-                    <img v-if="$page.props.auth.user?.picture" :src="$page.props.auth.user?.picture" alt="user"
-                         class="mw-100 h-100 object-fit-contain img-fluid">
-                    <img v-if="!$page.props.auth.user?.picture" :src="'/storage/images/default.jpg'" alt="user"
-                         class="mw-100 h-100 object-fit-contain img-fluid">
-                </div>
             </div>
         </div>
     </div>

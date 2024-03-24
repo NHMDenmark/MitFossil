@@ -1976,3 +1976,7 @@ button.gm-ui-hover-effect span{
 .welcome.jumbotron .degrade {
     background: linear-gradient(180deg, rgba(38, 74, 66, 0.75) 0%, rgba(38, 74, 66, 0) 100%);
 }
+
+.comment-author {
+    font-size: 18px;
+}

@@ -32,32 +32,17 @@ class RegisteredUserController extends Controller
     public function store(ImageRequest $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
             'username' => 'required|string|max:32|unique:'.User::class,
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'copyright_rule_id' => 'required',
-            'zip_code' => ['numeric'],
-            'year_birth' => ['numeric'],
         ]);
 
-        $images = $request->guardarFoto('picture', '/images', null);
-        $picture = null;
-
-        if(is_array($images)) {
-            $picture = $images[0];
-        }
-
         $user = User::create([
-            'name' => $request->name,
             'username' => $request->username,
-            'email' => $request->email,
             'password' => Hash::make($request->password),
             'copyright_rule_id' => $request->copyright_rule_id,
-            'picture' => $picture,
             'active' => true,
-            'zip_code' => $request->zip_code,
-            'year_birth' => $request->year_birth,
         ]);
 
         event(new Registered($user));

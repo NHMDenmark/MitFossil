@@ -12,9 +12,7 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 const table = [
-    { value: 'name', label: 'Navn'},
     { value: 'username', label: 'Brugernavn'},
-    { value: 'email', label: 'E-mail'},
     { value: 'role', label: 'Rolle', render: (value) => ( t(`rol.${value}`) )},
 ];
 
