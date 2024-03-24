@@ -134,6 +134,7 @@ export default {
             delete_confirm: 'Are you sure you want to delete your account?',
             delete_confirm_text: 'Once your account is deleted, all of its resources and data will be permanently deleted. Please\n' +
                 'enter your password to confirm you would like to permanently delete your account.',
+            questions: 'Answer security questions'
 
         },
         resources: {
@@ -384,6 +385,9 @@ export default {
         motive_delete: 'Motive Delete',
         zip_code: 'Zip Code',
         year_birth: 'Year of birth',
+        question_first: 'Question 1',
+        question_second: 'Question 2',
+        question_third: 'Question 3'
     },
     popup_image: {
         label: 'Select Photo...',

@@ -13,8 +13,6 @@ const submited = ref(false);
 const form = useForm({
     username: '',
     email: '',
-    password: '',
-    password_confirmation: '',
     copyright_rule_id: 3,
     terms: false,
     usage: false,
@@ -53,16 +51,6 @@ const submit = () => {
                 <InputTextInline name="email" v-model="form.email" :label="$t('form.email_2')" />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
-
-            <div class="form-group mt-4">
-                <InputTextInline name="password" v-model="form.password" :label="$t('form.password')" type="password" />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="form-group mt-4">
-                <InputTextInline name="password_confirmation" v-model="form.password_confirmation" :label="$t('form.repeat_password')" type="password" />
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>   
 
             <div class="accordion accordion-flush register-accordion" id="accordionUpload">
                 <div class="accordion-item">

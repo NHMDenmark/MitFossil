@@ -37,6 +37,7 @@ class UsersController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => trim($request->role),
+            'answered_questions' => true
         ]);
 
         return Redirect::route('admin.users.index');

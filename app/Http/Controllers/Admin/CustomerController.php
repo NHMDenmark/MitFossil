@@ -36,6 +36,7 @@ class CustomerController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'answered_questions' => true
         ]);
 
         return Redirect::route('admin.customer.index');

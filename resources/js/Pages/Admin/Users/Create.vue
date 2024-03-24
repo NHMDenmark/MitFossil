@@ -16,8 +16,6 @@ const roles = [
 const form = useForm({
     username: null,
     role: 'admin',
-    password: null,
-    password_confirmation: null,
 });
 </script>
 

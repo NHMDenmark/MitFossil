@@ -214,6 +214,7 @@ export default {
             delete_action: 'Anmod sletning',
             delete_confirm: 'Er du sikker på, at du vil slette din bruger?',
             delete_confirm_text: 'Når din bruger bliver slettet vil alle tilknyttede brugeroplysninger blive permanent slettet og vil ikke længere kunne tilgås. Dine billeder, kommentarer og øvrige funddata, som du har lagt ind på MitFossil, vil dog ikke blive slettet men blot anonymiseret. Indtast venligst din adgangskode for at bekræfte, at du vil slette din bruger permanent. En administrator vil derefter hurtigst muligt behandle din anmodning.',
+            questions: 'Answer security questions',
         },
         resources: {
             title: 'Ressourcer',
@@ -528,6 +529,9 @@ export default {
         license: 'Licens',
         notes: 'Noter',
         notes_2: 'Beskrivelse',
+        question_first: 'Question 1',
+        question_second: 'Question 2',
+        question_third: 'Question 3'
     },
     popup_image: {
         label: 'Klik her for at vælge billede eller træk det ind i feltet',

@@ -28,7 +28,8 @@ class User extends Authenticatable
         'fossil_region',
         'send_delete',
         'active',
-        'role'
+        'role',
+        'answered_questions'
     ];
 
     /**

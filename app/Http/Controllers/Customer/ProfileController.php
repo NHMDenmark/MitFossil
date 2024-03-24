@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Providers\RouteServiceProvider;
 use App\Models\CopyrightRule;
 use App\Models\Fossil;
 use App\Models\FossilRegion;
@@ -11,6 +12,7 @@ use App\Models\FossilSpeciality;
 use App\Models\Licence;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\UserSecurityQuestion;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,6 +45,44 @@ class ProfileController extends Controller
             'fossil' => $fossil,
             'origin' => $origin
         ]);
+    }
+
+    public function questions(Request $request)
+    {
+        return Inertia::render('Customer/Profile/Questions');
+    }
+
+    public function saveQuestions(Request $request)
+    {
+        $request->validate([
+            'first' => ['required', 'string'],
+            'second' => ['required', 'string'],
+            'third' => ['required', 'string']
+        ]);
+
+        UserSecurityQuestion::create([
+            'user_id' => $request->user['id'],
+            'question_number' => 1,
+            'answer' => $request->first,
+        ]);
+
+        UserSecurityQuestion::create([
+            'user_id' => $request->user['id'],
+            'question_number' => 2,
+            'answer' => $request->second,
+        ]);
+
+        UserSecurityQuestion::create([
+            'user_id' => $request->user['id'],
+            'question_number' => 3,
+            'answer' => $request->third,
+        ]);
+
+        $user = Auth::user();
+        $user->answered_questions = true;
+        $user->save();
+
+        return redirect(RouteServiceProvider::HOME);
     }
 
     /**
