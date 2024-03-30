@@ -15,9 +15,19 @@ defineProps({
 
 const form = useForm({
     email: '',
+    username: '',
+    first: '',
+    second: '',
+    third: '',
+    step: false
 });
 
 const submit = () => {
+    if (!form.step) {
+        form.step = true;
+        return;
+    }
+
     form.post(route('password.email'));
 };
 </script>
@@ -30,23 +40,29 @@ const submit = () => {
             {{ $t('pages.forgot_password.subtitle') }}
         </h1>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
         <p class="max-w-500 text-center fw-500 mb-0 mt-4">
             {{ $t('pages.forgot_password.text') }}
         </p>
 
         <form @submit.prevent="submit" class="mt-5 w-100 max-w-500 mb-0">
             <div class="form-group mt-4">
-                <InputTextInline name="email" v-model="form.email" :label="$t('form.email_2')" />
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputTextInline name="username" v-model="form.username" :label="$t('form.username')" />
+                <InputError class="mt-2" :message="form.errors.username" />
+            </div>
+            <div v-if="form.step">
+                <div class="form-group mt-4">
+                    <InputTextInline name="first" v-model="form.first" :label="$t('form.question_first')" />
+                    <InputError class="mt-2" :message="form.errors.first" />
+                    <InputTextInline class="mt-2" name="first" v-model="form.second" :label="$t('form.question_second')" />
+                    <InputError class="mt-2" :message="form.errors.second" />
+                    <InputTextInline class="mt-2" name="first" v-model="form.third" :label="$t('form.question_third')" />
+                    <InputError class="mt-2" :message="form.errors.third" />
+                </div>
             </div>
 
             <div class="d-flex justify-content-center mt-6">
                 <PrimaryButton :class-name="{ 'opacity-25': form.processing }" :disabled="form.processing" type="submit">
-                    {{ $t('pages.forgot_password.action') }}
+                    Next
                 </PrimaryButton>
             </div>
         </form>
