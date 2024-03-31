@@ -52,6 +52,7 @@ function manageAttachments(event) {
                                 </span>
                             </template>
                         </Editor>
+                        <InputError class="mt-2" :message="form.errors.text" />
                     </div>
                     <div class="col-12 mt-3 d-flex flex-column" v-if="messages[0].thread.status == 'open'">
                         <InputLabel class="mb-2" :value="$t('form.thread_message_attachments')"></InputLabel>
