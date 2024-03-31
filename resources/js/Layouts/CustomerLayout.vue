@@ -50,6 +50,7 @@ import FooterLayout from "@/Layouts/partials/FooterLayout.vue";
                         <nav-link :href="route('customer.e-museum')" class="d-lg-none">{{ $t('layout.customer.emuseum_text') }}</nav-link>
                         <nav-link :href="route('customer.resources')" class="d-lg-none">{{ $t('layout.customer.resources_text') }}</nav-link>
                         <nav-link v-if="$page.props.auth.user" :href="route('customer.notifications')">{{ $t('layout.customer.notifications_text') }}</nav-link>
+                        <nav-link v-if="$page.props.auth.user" :href="route('threads.index')">{{ $t('layout.customer.threads') }}</nav-link>
                         <nav-link v-if="$page.props.auth.user" :href="route('logout')" class="d-lg-none" method="post" as="button">{{ $t('layout.customer.logout_text') }}</nav-link>
                     </ul>
                     <div class="navbar-text text-uppercase c-black fw-700 p-0">
@@ -115,6 +116,11 @@ import FooterLayout from "@/Layouts/partials/FooterLayout.vue";
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="#9FA2B4" opacity="0.4" d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
                                         <span class="nav-text">{{ $t('layout.customer.notifications_text') }}</span>
                                         <span v-if="$page.props.auth.notifications > 0" class="nav-badge"><span class="nav-badge-num">{{ $page.props.auth.notifications }}</span></span>
+                                    </NavLink>
+                                    <NavLink v-if="$page.props.auth.user" :href="route('threads.index')" :active="route().current('threads.index') ||
+                                        route().current('threads.create') || route().current('threads.get')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 121.58 122.88"><path fill="#9FA2B4" opacity="0.4" d="M25.8,111.27,44.08,94.69a3.46,3.46,0,0,1,2.41-1h66.18a2,2,0,0,0,2-1.95V8.9a2,2,0,0,0-2-1.95H8.9A1.95,1.95,0,0,0,7,8.9V91.76a1.95,1.95,0,0,0,2,1.95H22.33a3.48,3.48,0,0,1,3.47,3.48v14.08Zm1.17-45a3.48,3.48,0,0,0,0,7H68a3.48,3.48,0,0,0,0-7Zm0-39.86a3.48,3.48,0,0,0,0,7H94.69a3.48,3.48,0,1,0,0-6.95Zm0,19.93a3.48,3.48,0,0,0,0,6.95H87.66a3.48,3.48,0,0,0,0-6.95Zm20.9,54.32-23,21.07a3.48,3.48,0,0,1-6.06-2.32V100.66H8.9A8.91,8.91,0,0,1,0,91.76V8.9A8.91,8.91,0,0,1,8.9,0H112.67a8.93,8.93,0,0,1,8.91,8.9V91.76a8.93,8.93,0,0,1-8.91,8.9Z"/></svg>
+                                        <span class="nav-text">{{ $t('layout.customer.threads') }}</span>
                                     </NavLink>
                                     <NavLink v-show="$page.props.auth.user" :href="route('logout')" method="post" as="button">
                                         <IconLogout></IconLogout>

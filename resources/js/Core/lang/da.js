@@ -18,6 +18,11 @@ export default {
             emuseum_action: 'Besøg eMuseet',
             news_title: 'Nyheder'
         },
+        threads: {
+            create_title: 'Create new thread',
+            list_title: 'List of threads',
+            thread_title: 'Current thread'
+        },
         login: {
             title: 'Log ind',
             text: 'Velkommen, log ind med dine brugeroplysninger her.',
@@ -327,7 +332,8 @@ export default {
             identify_find_text: 'Identificér fossil',
             emuseum_text: 'eMuseum',
             resources_text: 'Ressourcer',
-            notifications_text: 'Meddelelser'
+            notifications_text: 'Meddelelser',
+            threads: 'Threads'
         },
         guest: {
             title: 'Statens Naturhistoriske Museum',
@@ -531,7 +537,12 @@ export default {
         notes_2: 'Beskrivelse',
         question_first: 'Question 1',
         question_second: 'Question 2',
-        question_third: 'Question 3'
+        question_third: 'Question 3',
+        thread_receiver: 'Receiver',
+        thread_title: 'Title',
+        thread_category: 'Category',
+        thread_message_text: 'Text',
+        thread_message_attachments: 'Attachments'
     },
     popup_image: {
         label: 'Klik her for at vælge billede eller træk det ind i feltet',

@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Curator\HomeController as CuratorHomeController;
 use App\Http\Controllers\Customer\ProfileController;
+use App\Http\Controllers\Threads\ThreadController;
+use App\Http\Controllers\Threads\MessageController;
+use App\Http\Controllers\Threads\AttachmentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,6 +46,17 @@ Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'que
     Route::delete('/new-fossil', [\App\Http\Controllers\Customer\NewFossilController::class, 'destroy'])->name('new-fossil.destroy');
     Route::get('/edit-fossil/{fossil}', [\App\Http\Controllers\Customer\NewFossilController::class, 'edit'])->name('new-fossil.edit');
     Route::put('/update-fossil/{fossil}', [\App\Http\Controllers\Customer\NewFossilController::class, 'update'])->name('new-fossil.update');
+});
+
+Route::group(['prefix' => 'threads', 'as' => 'threads.', 'middleware' => ['auth', 'questions']], function () {
+    Route::get('/', [ThreadController::class, 'index'])->name('index');
+    Route::get('/create', [ThreadController::class, 'create'])->name('create');
+    Route::post('/', [ThreadController::class, 'store'])->name('store');
+    Route::get('/{thread}', [ThreadController::class, 'get'])->name('get');
+    Route::get('/attachment/{name}', [ThreadController::class, 'getAttachment'])->name('get_attachment');
+    Route::get('/{thread}/status/{status}', [ThreadController::class, 'changeStatus'])->name('change_status');
+    Route::get('/{thread}/{message}/delete', [ThreadController::class, 'deleteMessage'])->name('delete_message');
+    Route::post('/{thread}/message', [ThreadController::class, 'storeMessage'])->name('storeMessage');
 });
 
 Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'role:customer,curator', 'questions']], function () {

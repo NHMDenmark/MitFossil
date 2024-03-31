@@ -20,6 +20,11 @@ export default {
             emuseum_action: 'GO TO EMUSEUM',
             news_title: 'News',
         },
+        threads: {
+            create_title: 'Create new thread',
+            list_title: 'List of threads',
+            thread_title: 'Current thread'
+        },
         login: {
             title: 'Log In',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -228,7 +233,8 @@ export default {
             identify_find_text: 'Identify finds',
             emuseum_text: 'EMuseum',
             resources_text: 'Resources',
-            notifications_text: 'Notifications'
+            notifications_text: 'Notifications',
+            threads: 'Threads'
         },
         guest: {
             title: 'Statens Naturhistoriske Museum',
@@ -387,7 +393,12 @@ export default {
         year_birth: 'Year of birth',
         question_first: 'Question 1',
         question_second: 'Question 2',
-        question_third: 'Question 3'
+        question_third: 'Question 3',
+        thread_receiver: 'Receiver',
+        thread_title: 'Title',
+        thread_category: 'Category',
+        thread_message_text: 'Text',
+        thread_message_attachments: 'Attachments'
     },
     popup_image: {
         label: 'Select Photo...',

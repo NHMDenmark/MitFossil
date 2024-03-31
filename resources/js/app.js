@@ -14,6 +14,8 @@ import i18n from './Core/lang/config';
 import 'viewerjs/dist/viewer.css';
 import VueViewer from 'v-viewer';
 
+import PrimeVue from 'primevue/config';
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'MitFossil';
 window.csrf_token = window.document.head.querySelector("[name~=csrf-token][content]")?.content || '';
 
@@ -30,6 +32,7 @@ createInertiaApp({
             .use(pinia)
             .use(VueViewer)
             .use(ZiggyVue, Ziggy)
+            .use(PrimeVue)
             .mount(el);
     },
     progress: {

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Thread;
 
 class User extends Authenticatable
 {
@@ -109,5 +110,15 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomResetPasswordNotification($token));
+    }
+
+    public function threadsSent()
+    {
+        return $this->hasMany(Thread::class, 'sender_id');
+    }
+
+    public function threadsReceived()
+    {
+        return $this->hasMany(Thread::class, 'receiver_id');
     }
 }
