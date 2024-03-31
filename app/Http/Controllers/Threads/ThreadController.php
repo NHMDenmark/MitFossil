@@ -60,7 +60,8 @@ class ThreadController extends Controller
             'receiver_id' => ['required', 'integer', 'exists:users,id'],
             'title' => ['required', 'string'],
             'status' => ['required', 'string', 'in:open,closed'],
-            'category' => ['required', 'string']
+            'category' => ['required', 'string'],
+            'text' => ['required', 'string']
         ]);
 
         $thread = Thread::create([
@@ -69,10 +70,6 @@ class ThreadController extends Controller
             'title' => $request->title,
             'status' => $request->status,
             'category' => $request->category
-        ]);
-
-        $request->validate([
-            'text' => ['required', 'string']
         ]);
 
         $message = Message::create([
