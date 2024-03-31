@@ -19,6 +19,8 @@ class Epoch extends Model
         'active',
     ];
 
+    protected $table = 'epoches';
+
     public function period() : BelongsTo {
         return $this->belongsTo(Period::class, 'period_id');
     }
