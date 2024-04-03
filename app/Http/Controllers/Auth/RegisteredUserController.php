@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
         $text = 'Your OTP password to login to Mitfossil - ' . $otp;
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
         Mail::to($request->email)->send(new SendOTP(['body' => $text], 'One-Time Password'));
-        Mail::to('yehor@rainbowriders.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
+        Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
         
         return redirect(route('login'));
     }
