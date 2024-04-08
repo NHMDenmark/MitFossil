@@ -35,22 +35,22 @@ const form = useForm({
                     <h5 class="heading-s fw-700 mb-3">{{ $t('pages.profile.questions') }}</h5>
                     <form @submit.prevent="form.post(route('save_questions'))">
 
-                        <div class="row mt-4">
-                            <div class="col-12 col-sm-6 mt-3">
-                                <div class="form-group">
-                                    <InputTextInline name="first" v-model="form.first" :label="$t('form.question_first')" />
+                        <div class="d-flex flex-column mt-4">
+                            <div class="col-12 mt-3">
+                                <div class="">
+                                    <InputTextInline :labelTop="true" name="first" v-model="form.first" :label="$t('form.question_first')" />
                                     <InputError class="mt-2" :message="form.errors.first" />
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6 mt-3">
-                                <div class="form-group">
-                                    <InputTextInline name="second" v-model="form.second" :label="$t('form.question_second')" />
+                            <div class="col-12 mt-3">
+                                <div class="">
+                                    <InputTextInline :labelTop="true" name="second" v-model="form.second" :label="$t('form.question_second')" />
                                     <InputError class="mt-2" :message="form.errors.second" />
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6 mt-3">
-                                <div class="form-group">
-                                    <InputTextInline name="third" v-model="form.third" :label="$t('form.question_third')" />
+                            <div class="col-12 mt-3">
+                                <div class="">
+                                    <InputTextInline :labelTop="true" name="third" v-model="form.third" :label="$t('form.question_third')" />
                                     <InputError class="mt-2" :message="form.errors.third" />
                                 </div>
                             </div>

@@ -5,7 +5,8 @@ defineProps({
     modelValue: { types: [String, Number, null], required: true },
     label: { type: String },
     name: { type: String },
-    type: { type: String, default: 'text' }
+    type: { type: String, default: 'text' },
+    labelTop: { type: Boolean, default: false }
 });
 
 defineEmits(['update:modelValue']);
@@ -22,8 +23,8 @@ defineExpose({ focus: () => input.value.focus() });
 </script>
 
 <template>
-    <div class="d-flex align-items-md-center flex-column flex-md-row">
-        <label class="text-uppercase" :for="name">
+    <div class="d-flex flex-column" :class="{'flex-md-row': !labelTop, 'align-items-md-center': !labelTop}">
+        <label class="text-uppercase" :for="name" :class="{'mb-2': labelTop}">
             <span> {{ label }}</span>
         </label>
         <template v-if="type !== 'textarea'">
