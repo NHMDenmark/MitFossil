@@ -13,16 +13,20 @@ class Thread extends Model
 
     public const CATEGORIES = [
         [
-            'value' => 'Fossil',
-            'label' => 'Fossil',
+            'value' => 'Indsendt fossil',
+            'label' => 'Indsendt fossil',
         ],
         [
-            'value' => 'Bad behavior',
-            'label' => 'Bad behavior',
+            'value' => 'Brud på regler eller upassende adfærd',
+            'label' => 'Brud på regler eller upassende adfærd',
         ],
         [
-            'value' => 'Technical help',
-            'label' => 'Tchnical help'
+            'value' => 'Teknisk hjælp',
+            'label' => 'Teknisk hjælp'
+        ],
+        [
+            'value' => 'Andet',
+            'label' => 'Andet'
         ]
     ];
 

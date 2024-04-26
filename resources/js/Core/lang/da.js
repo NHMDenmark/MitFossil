@@ -61,6 +61,11 @@ export default {
             action: 'Send ny e-mail med bekræftelseslink',
             logout_text: 'Log ud'
         },
+        confirm_register: {
+            title: 'Konto blev registreret',
+            text: 'Tak for din tilmelding! Vi har sendt dig engangsadgangskode til login via e-mail. Gå til login-siden eller tryk på knappen nedenfor for at godkende.',
+            action: 'Gå til login'
+        },
         my_page: {
             title: 'Overblik',
             my_collection_title: 'Se din egen samling af fossiler',
@@ -213,6 +218,7 @@ export default {
             verify_action: 'Klik her for at sende en ny bekræftelsesmail.',
             verify_text: 'En ny bekræftelsesmail er blevet sendt til din e-mailadresse. Tjek eventuelt spam.',
             update_password: 'Skift adgangskode',
+            update_questions: 'Opdater svar',
             delete_account: 'Slet bruger',
             delete_text: 'Når din bruger er slettet, vil alle tilknyttede brugeroplysninger blive permanent slettet og vil ikke længere kunne tilgås.',
             delete_sent_text: 'Din anmodning om sletning af bruger er blevet sendt.',
@@ -394,7 +400,7 @@ export default {
             ages_text_2: 'Alder',
             resources_text: 'Ressourcer',
             resources_text_2: 'Ressource',
-            resources_text_3: 'Underside',            
+            resources_text_3: 'Underside',
             news_text: 'Nyheder',
             news_text_2: 'Nyhed',
             files_text: 'Filer',
@@ -533,7 +539,6 @@ export default {
         year_birth: 'Fødselsår',
         rol: 'Rolle',
         license: 'Licens',
-        notes: 'Noter',
         notes_2: 'Beskrivelse',
         question_first: 'Hvilket husnummer havde den første adresse, du boede på?',
         question_second: 'Hvilken sport/fritidsaktivitet var den første, du gik til?',

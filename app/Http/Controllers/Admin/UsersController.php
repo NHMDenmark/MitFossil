@@ -6,6 +6,7 @@ use App\Core\Functions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAdminRequest;
 use App\Models\User;
+use App\Models\UserSecurityQuestion;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,8 +46,9 @@ class UsersController extends Controller
 
     function edit($id) {
         $user = User::findOrFail($id);
+        $userQuestions = UserSecurityQuestion::where('user_id', $user->id)->pluck('answer', 'question_number');
 
-        return Inertia::render('Admin/Users/Edit', compact('user'));
+        return Inertia::render('Admin/Users/Edit', compact('user', 'userQuestions'));
     }
 
     function update(UserAdminRequest $request, $id) : RedirectResponse {

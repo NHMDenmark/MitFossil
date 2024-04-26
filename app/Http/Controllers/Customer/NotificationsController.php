@@ -25,6 +25,9 @@ class NotificationsController extends Controller
         $notification->save();
 
         if($notification->fossil_id !== null) {
+            if($notification->type == 'new-message') {
+                return to_route('threads.get', ['thread' => $notification->fossil_id]);
+            }
             return to_route('customer.dashboard', ['fossil' => $notification->fossil_id]);
         } else {
             return to_route('customer.notifications');

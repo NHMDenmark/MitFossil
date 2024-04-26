@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\QuestionsUpdateRequest;
 use App\Providers\RouteServiceProvider;
 use App\Models\CopyrightRule;
 use App\Models\Fossil;
@@ -38,12 +39,15 @@ class ProfileController extends Controller
             $fossil = Fossil::getFossil($fossil_id);
         }
 
+        $userQuestions = UserSecurityQuestion::where('user_id', $request->user()->id)->pluck('answer', 'question_number');
+
         return Inertia::render('Customer/Profile/Edit', [
             'myCollections' => $myCollections,
             'status' => session('status'),
             'copyright_rules' => $copyright_rules,
             'fossil' => $fossil,
-            'origin' => $origin
+            'origin' => $origin,
+            'userQuestions' => $userQuestions
         ]);
     }
 
@@ -126,6 +130,27 @@ class ProfileController extends Controller
                     'viewed' => false
                 ]);
             }
+        }
+
+        return Redirect::route('customer.profile.edit');
+    }
+
+    public function updateQuestions(QuestionsUpdateRequest $request)
+    {
+        $user = $request->user();
+        $answers = [
+            1 => $request->input('first'),
+            2 => $request->input('second'),
+            3 => $request->input('third'),
+        ];
+
+        foreach ($answers as $number => $answer) {
+            UserSecurityQuestion::updateOrCreate([
+                'user_id' => $user->id,
+                'question_number' => $number
+            ], [
+                'answer' => $answer
+            ]);
         }
 
         return Redirect::route('customer.profile.edit');

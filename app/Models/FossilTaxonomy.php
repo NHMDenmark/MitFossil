@@ -112,7 +112,7 @@ class FossilTaxonomy extends Model
         $array8 = $subgenre ->get()->toArray();
         $array9 = $specific_epithet ->get()->toArray();
         $array10 = $subspecies ->get()->toArray();
-        $raw = array_merge($array1, $array2, $array3, $array4, $array5, $array6, $array7, $array8, $array9, $array10);
+        $raw = array_merge($array2, $array3, $array4, $array5, $array6, $array7, $array8, $array10);
 
         $temp = [];
 

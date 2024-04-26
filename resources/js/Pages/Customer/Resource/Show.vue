@@ -26,7 +26,7 @@ defineProps({
                                             :key="item.id"
                                             :resource="item"
                                             :redirect="true"
-                                            class="my-2 col-sm-12 col-lg-6 col-xl-4"
+                                            class="my-2 col-sm-12 col-md-12 col-xl-6"
                                             @click="">
                                 </CardResource>
                             </div>

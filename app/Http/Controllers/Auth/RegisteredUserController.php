@@ -40,9 +40,9 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'email'],
             'copyright_rule_id' => 'required',
         ]);
-        
+
         $otp = Str::random(20);
-        
+
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($otp),
@@ -57,7 +57,12 @@ class RegisteredUserController extends Controller
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
         Mail::to($request->email)->send(new SendOTP(['body' => $text], 'One-Time Password'));
         Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
-        
-        return redirect(route('login'));
+
+        return redirect(route('register.confirm'));
+    }
+
+    public function confirmPage(): Response
+    {
+        return Inertia::render('Auth/ConfirmRegister');
     }
 }

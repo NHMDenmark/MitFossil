@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Threads;
 
+use App\Models\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Http\Controllers\Controller;
@@ -93,6 +94,15 @@ class ThreadController extends Controller
                 ]);
             }
         }
+
+        Notification::create([
+            'user_id' => $request->receiver_id,
+            'user_notificator_id' => Auth::id(),
+            'type' => 'new-message',
+            'fossil_id' => $thread->id,
+            'title' => 'Ny besked',
+            'text' => 'En bruger har sendt dig besked.'
+        ]);
 
         return redirect(route('threads.get', ['thread' => $thread->id]));
     }
@@ -192,6 +202,15 @@ class ThreadController extends Controller
                 ]);
             }
         }
+
+        Notification::create([
+            'user_id' => $thread->receiver_id,
+            'user_notificator_id' => Auth::id(),
+            'type' => 'new-message',
+            'fossil_id' => $thread->id,
+            'title' => 'Ny besked',
+            'text' => 'En bruger har sendt dig besked.'
+        ]);
 
         return Inertia::location(route('threads.get', ['thread' => $thread->id]));
     }

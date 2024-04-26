@@ -12,7 +12,8 @@ import {useI18n} from "vue-i18n";
 const {t} = useI18n({})
 
 const props = defineProps({
-    user: { type: Object }
+    user: { type: Object },
+    userQuestions: { type: Object }
 })
 
 const roles = [
@@ -94,6 +95,15 @@ const form = useForm({
                                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">{{ $t('form.saved') }}</p>
                                 </Transition>
                             </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <p class="heading-s fw-700 mb-3">{{$t('form.question_first')}}</p>
+                            <p>{{userQuestions[1] ?? '-'}}</p>
+                            <p class="heading-s fw-700 mb-3">{{$t('form.question_second')}}</p>
+                            <p>{{userQuestions[1] ?? '-'}}</p>
+                            <p class="heading-s fw-700 mb-3">{{$t('form.question_third')}}</p>
+                            <p>{{userQuestions[1] ?? '-'}}</p>
                         </div>
                     </form>
                 </div>

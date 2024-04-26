@@ -277,7 +277,7 @@ async function onOkConfirm() {
                             @ok="onReport2"
                             :options="$page.props.curators"
                             :title="$t('components.modal_view.report_action')"
-                            :report_action_inappropriate="$t('components.modal_view.report_action_inappropriate')" 
+                            :report_action_inappropriate="$t('components.modal_view.report_action_inappropriate')"
                             :report_action_not_fossil="$t('components.modal_view.report_action_not_fossil')"
                             :report_action_comment="$t('components.modal_view.report_action_comment')"
                             :subtitle="$t('components.modal_view.report_action_title')"
@@ -315,16 +315,16 @@ async function onOkConfirm() {
             <Comments :comments="fossil.fossil_comments" :fossil="fossil"></Comments>
 
             <div class="fossil-details row mt-3">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-6">
                     <Classification :fossil="fossil"></Classification>
 
                     <GeologicalContext :fossil="fossil"></GeologicalContext>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-6">
                     <lithostratigraphy :fossil="fossil"></lithostratigraphy>
                     <Location :fossil="fossil" :show-map="showMap"></Location>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-6">
                     <Dimensions :fossil="fossil"></Dimensions>
                     <Notes :fossil="fossil"></Notes>
                 </div>
@@ -345,7 +345,7 @@ async function onOkConfirm() {
                 </div>
             </div>
         </div>
-        </Modal>     
+        </Modal>
 
     </Modal>
 </template>

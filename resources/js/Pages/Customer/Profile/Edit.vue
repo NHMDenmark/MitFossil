@@ -2,6 +2,7 @@
 import CustomerLayout from '@/Layouts/CustomerLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
+import UpdateQuestionsForm from './Partials/UpdateQuestionsForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import {Head, usePage} from '@inertiajs/vue3';
 import CardStats from "@/Components/partials/CardStats.vue";
@@ -23,7 +24,8 @@ const props = defineProps({
     copyright_rules: { type: Array },
     fossilRegion: { type: Array },
     fossilSpecialities: { type: Array },
-    fossil: { type: Object }
+    fossil: { type: Object },
+    userQuestions: { type: Object }
 });
 
 const user = usePage().props.auth.user;
@@ -44,6 +46,10 @@ const user = usePage().props.auth.user;
                         :status="status" />
 
                     <UpdatePasswordForm
+                        class="max-w-xl" />
+
+                    <UpdateQuestionsForm
+                        :questions="userQuestions"
                         class="max-w-xl" />
 
                     <DeleteUserForm
