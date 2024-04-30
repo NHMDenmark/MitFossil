@@ -36,7 +36,10 @@ function manageAttachments(event) {
                 <form @submit.prevent="form.post(route('threads.storeMessage', {thread: messages[0].thread.id}));" class="col bg-white border-light shadow rounded p-4 pt-5">
                     <div class="d-flex w-100 justify-content-between">
                         <h2>{{ messages[0].thread.status == 'open' ? 'Reply to the thread' : 'View thread' }}</h2>
-                        <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" type="link" :url="route('threads.change_status', {thread: messages[0].thread.id, status: messages[0].thread.status == 'closed' ? 'open' : 'closed'})">{{ messages[0].thread.status == 'closed' ? 'Open' : 'Close' }}</PrimaryButton>
+                        <div class="d-flex">
+                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" style="margin-right: 10px;" type="link" :url="route('threads.delete', {thread: messages[0].thread.id})">Delete</PrimaryButton>
+                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" type="link" :url="route('threads.change_status', {thread: messages[0].thread.id, status: messages[0].thread.status == 'closed' ? 'open' : 'closed'})">{{ messages[0].thread.status == 'closed' ? 'Open' : 'Close' }}</PrimaryButton>
+                        </div>
                     </div>
                     <div class="col-12 mt-3" v-if="messages[0].thread.status == 'open'">
                         <InputLabel class="mb-2" :value="$t('form.thread_message_text')"></InputLabel>

@@ -150,6 +150,7 @@ class ThreadController extends Controller
 
     public function get(Thread $thread)
     {
+        Auth::user()->sendEmailVerificationNotification();
         $user = Auth::user();
         $thread = Thread::with('messages', 'sender', 'receiver', 'messages.sender', 'messages.attachments', 'messages.thread')->find($thread->id);
         $messages = $thread->messages;
@@ -161,6 +162,18 @@ class ThreadController extends Controller
         }
 
         return Inertia::render('Threads/Thread', compact('messages', 'sender', 'receiver', 'thread', 'user'));
+    }
+
+    public function delete(Thread $thread)
+    {
+        $user = Auth::user();
+        if($user->role == 'admin') {
+            $thread = Thread::find($thread->id);
+            $thread->messages()->delete();
+            $thread->delete();
+        }
+
+        return redirect(route('threads.index'));
     }
 
     public function storeMessage(Request $request, Thread $thread)

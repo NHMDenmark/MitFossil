@@ -53,6 +53,7 @@ Route::group(['prefix' => 'threads', 'as' => 'threads.', 'middleware' => ['auth'
     Route::get('/create', [ThreadController::class, 'create'])->name('create');
     Route::post('/', [ThreadController::class, 'store'])->name('store');
     Route::get('/{thread}', [ThreadController::class, 'get'])->name('get');
+    Route::get('/delete/{thread}', [ThreadController::class, 'delete'])->name('delete');
     Route::get('/attachment/{name}', [ThreadController::class, 'getAttachment'])->name('get_attachment');
     Route::get('/{thread}/status/{status}', [ThreadController::class, 'changeStatus'])->name('change_status');
     Route::get('/{thread}/{message}/delete', [ThreadController::class, 'deleteMessage'])->name('delete_message');

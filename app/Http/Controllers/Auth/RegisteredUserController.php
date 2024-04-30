@@ -53,9 +53,14 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $text = 'Your OTP password to login to Mitfossil - ' . $otp;
+        $text = "<p>Velkommen til MitFossil!</p>
+                 <p>Tak for at oprette dig som bruger på MitFossil og slutte dig til fællesskabet. Det er vigtigt at huske, at MitFossil kun er til indsendelse og identifikation af fossiler fundet i Danmark.</p>
+                 <p>Du mangler kun et sidste skridt for at være helt klar. Bekræft din e-mailadresse ved at trykke på knappen nedenunder :D</p>
+                 <p>Gå til <a href='".route('login')."'></a> og log ind på din konto med engangsadgangskoden: <b>$otp</b></p>";
+
+//        $text = 'Your OTP password to login to Mitfossil - ' . $otp;
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
-        Mail::to($request->email)->send(new SendOTP(['body' => $text], 'One-Time Password'));
+        Mail::to($request->email)->send(new SendOTP(['body' => $text], 'Bekræft e-mailadresse'));
         Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
 
         return redirect(route('register.confirm'));

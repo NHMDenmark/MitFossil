@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\CustomResetPasswordNotification;
+use App\Notifications\CustomVerifyEmailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,7 +51,7 @@ class User extends Authenticatable
     public static function getCantMembers() {
         return self::query()
             ->where([
-                'active' => true            
+                'active' => true
             ])
             ->count();
     }
@@ -121,4 +122,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Thread::class, 'receiver_id');
     }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new CustomVerifyEmailNotification);
+    }
+
 }
