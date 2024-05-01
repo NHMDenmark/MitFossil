@@ -1,19 +1,25 @@
 <script setup>
 import { computed } from 'vue';
 import SesionLayout from '@/Layouts/SesionLayout.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import InputTextInline from "@/Components/InputTextInline.vue";
+import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
-    status: {
-        type: String,
-    },
+    status: {type: String},
+    username: {type: String},
+
 });
 
-const form = useForm({});
+const form = useForm({
+    username: props.username,
+    password: '',
+});
 
 const submit = () => {
-    form.post(route('verification.send'));
+    form.post(route('login'), {
+        onFinish: () => form.reset('password'),
+    });
 };
 
 const verificationLinkSent = computed(() => props.status === 'verification-link-sent');
@@ -32,11 +38,16 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
             {{ $t('pages.confirm_register.text') }}
         </p>
 
-        <form :action="route('login')" method="GET" @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <PrimaryButton :class-name="{ 'opacity-25': form.processing }" :disabled="form.processing" type="submit">
+        <form @submit.prevent="submit" class="w-100 max-w-500 mb-0">
+            <div class="form-group mt-4">
+                <InputTextInline v-model="form.password" name="password" :label="$t('pages.confirm_register.label')" type="password"></InputTextInline>
+                <InputError class="mt-2" :message="form.errors.username" />
+                <!--<InputError class="mt-2" :message="form.errors.password" />-->
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button class="rounded text-uppercase btn-mit" type="submit">
                     {{ $t('pages.confirm_register.action') }}
-                </PrimaryButton>
+                </button>
             </div>
         </form>
 

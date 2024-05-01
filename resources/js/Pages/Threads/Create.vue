@@ -9,7 +9,7 @@ import SelectInput from "@/Components/SelectInput.vue";
 import { Link, useForm, usePage, router } from '@inertiajs/vue3';
 import Editor from 'primevue/editor';
 
-defineProps({ receivers: Array, categories: Array })
+defineProps({ receivers: Array, categories: Array, user: Object })
 
 const form = useForm({
     receiver_id: null,
@@ -36,7 +36,7 @@ function manageAttachments(event) {
         <div class="flex-content container-fluid p-3 p-md-45 bg-white-3">
             <div class="d-flex flex-column flex-xl-row gap-45 align-items-start">
                 <form @submit.prevent="form.post(route('threads.store'))" class="col bg-white border-light shadow rounded p-4 pt-5">
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-3" v-if="user.role === 'admin'">
                         <h3 class="mb-4">Send a new message</h3>
                         <InputLabel for="receiver_id" :value="$t('form.thread_receiver')" />
 

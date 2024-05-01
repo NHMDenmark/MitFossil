@@ -14,7 +14,7 @@ defineProps({ threads: Array, user: Object })
             <div class="d-flex flex-column flex-xl-row gap-45 align-items-start">
                 <div class="col bg-white border-light shadow rounded p-4 pt-5">
                     <div class="d-flex flex-column text-center">
-                        <PrimaryButton v-if="user.role != 'admin'" class="me-2 align-self-end" type="link" :url="route('threads.create')">Send new message</PrimaryButton>
+                        <PrimaryButton class="me-2 align-self-end" type="link" :url="route('threads.create')">Send new message</PrimaryButton>
                         <h2 class="mb-4">Threads</h2>
                         <div v-if="threads.length > 0" class="d-flex flex-column">
                             <table class="table table-responsive-xxl">

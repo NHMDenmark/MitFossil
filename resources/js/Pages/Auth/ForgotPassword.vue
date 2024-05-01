@@ -41,28 +41,28 @@ const submit = () => {
         </h1>
 
         <p class="max-w-500 text-center fw-500 mb-0 mt-4">
-            {{ $t('pages.forgot_password.text') }}
+          {{form.step ? 'Besvar sikkerhedsspørgsmålene for din bruger og klik derefter på ‘Fortsæt’ for at lave en ny adgangskode.' : 'Intet problem. Indtast dit brugernavn og klik på ‘Fortsæt til sikkerhedsspørgsmål’'}}
         </p>
 
-        <form @submit.prevent="submit" class="mt-5 w-100 max-w-500 mb-0">
+        <form @submit.prevent="submit" class="w-100 max-w-500 mb-0">
             <div class="form-group mt-4">
                 <InputTextInline name="username" v-model="form.username" :label="$t('form.username')" />
                 <InputError class="mt-2" :message="form.errors.username" />
             </div>
             <div v-if="form.step">
-                <div class="form-group mt-4">
-                    <InputTextInline name="first" v-model="form.first" :label="$t('form.question_first')" />
+                <div class="mt-4">
+                    <InputTextInline name="first" :labelTop="true" v-model="form.first" :label="$t('form.question_first')" />
                     <InputError class="mt-2" :message="form.errors.first" />
-                    <InputTextInline class="mt-2" name="first" v-model="form.second" :label="$t('form.question_second')" />
+                    <InputTextInline class="mt-4" :labelTop="true" name="first" v-model="form.second" :label="$t('form.question_second')" />
                     <InputError class="mt-2" :message="form.errors.second" />
-                    <InputTextInline class="mt-2" name="first" v-model="form.third" :label="$t('form.question_third')" />
+                    <InputTextInline class="mt-4" :labelTop="true" name="first" v-model="form.third" :label="$t('form.question_third')" />
                     <InputError class="mt-2" :message="form.errors.third" />
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center mt-6">
+            <div class="d-flex justify-content-center mt-4">
                 <PrimaryButton :class-name="{ 'opacity-25': form.processing }" :disabled="form.processing" type="submit">
-                    Next
+                  Fortsæt {{!form.step ? 'til sikkerhedsspørgsmål' : ''}}
                 </PrimaryButton>
             </div>
         </form>

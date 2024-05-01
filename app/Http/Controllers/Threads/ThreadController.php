@@ -34,47 +34,48 @@ class ThreadController extends Controller
     public function create()
     {
         $categories = Thread::CATEGORIES;
+
         $user = Auth::user();
 
-        switch ($user->role) {
-            case 'customer':
-                $receivers = User::where('role', 'curator')->get();
-                break;
-            case 'curator':
-                $receivers = User::where('role', 'customer')->get();
-                break;
-        }
+        $receivers = User::whereIn('role', ['customer', 'curator'])
+            ->whereNotNull('username')
+            ->get()
+            ->map(function ($item, $key) {
+                return [
+                    'value' => $item->id,
+                    'label' => $item->username
+                ];
+            });
 
-        $receivers = $receivers->map(function($item, $key) {
-            return [
-                'value' => $item->id,
-                'label' => $item->username
-            ];
-        });
-
-        return Inertia::render('Threads/Create', compact('categories', 'receivers'));
+        return Inertia::render('Threads/Create', compact('categories', 'receivers', 'user'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'receiver_id' => ['required', 'integer', 'exists:users,id'],
             'title' => ['required', 'string'],
             'status' => ['required', 'string', 'in:open,closed'],
             'category' => ['required', 'string'],
             'text' => ['required', 'string']
         ]);
 
+        $user = Auth::user();
+        if($user->role == 'admin') {
+            $receiverID = $request->receiver_id;
+        } else {
+            $receiverID = User::where('role', 'admin')->first()->id;
+        }
+
         $thread = Thread::create([
-            'receiver_id' => $request->receiver_id,
-            'sender_id' => Auth::id(),
+            'receiver_id' => $receiverID,
+            'sender_id' => $user->id,
             'title' => $request->title,
             'status' => $request->status,
             'category' => $request->category
         ]);
 
         $message = Message::create([
-            'sender_id' => Auth::id(),
+            'sender_id' => $user->id,
             'body' => $request->text,
             'thread_id' => $thread->id
         ]);
@@ -84,8 +85,8 @@ class ThreadController extends Controller
                 $filenameWithExt = $attachment->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $attachment->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $attachment->storeAs('attachments',$fileNameToStore);
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $path = $attachment->storeAs('attachments', $fileNameToStore);
 
                 MessageAttachment::create([
                     'message_id' => $message->id,
@@ -94,15 +95,28 @@ class ThreadController extends Controller
                 ]);
             }
         }
+        if($user->role == 'admin') {
+            Notification::create([
+                'user_id' => $receiverID,
+                'user_notificator_id' => $user->id,
+                'type' => 'new-message',
+                'fossil_id' => $thread->id,
+                'title' => 'Ny besked',
+                'text' => 'En bruger har sendt dig besked.'
+            ]);
+        } else {
+            foreach (User::where('role', 'admin')->get() as $admin) {
+                Notification::create([
+                    'user_id' => $admin->id,
+                    'user_notificator_id' => $user->id,
+                    'type' => 'new-message',
+                    'fossil_id' => $thread->id,
+                    'title' => 'Ny besked',
+                    'text' => 'En bruger har sendt dig besked.'
+                ]);
+            }
+        }
 
-        Notification::create([
-            'user_id' => $request->receiver_id,
-            'user_notificator_id' => Auth::id(),
-            'type' => 'new-message',
-            'fossil_id' => $thread->id,
-            'title' => 'Ny besked',
-            'text' => 'En bruger har sendt dig besked.'
-        ]);
 
         return redirect(route('threads.get', ['thread' => $thread->id]));
     }
@@ -167,7 +181,7 @@ class ThreadController extends Controller
     public function delete(Thread $thread)
     {
         $user = Auth::user();
-        if($user->role == 'admin') {
+        if ($user->role == 'admin') {
             $thread = Thread::find($thread->id);
             $thread->messages()->delete();
             $thread->delete();
@@ -205,8 +219,8 @@ class ThreadController extends Controller
                 $filenameWithExt = $attachment->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $attachment->getClientOriginalExtension();
-                $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $attachment->storeAs('attachments',$fileNameToStore);
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $path = $attachment->storeAs('attachments', $fileNameToStore);
 
                 MessageAttachment::create([
                     'message_id' => $message->id,
@@ -216,14 +230,27 @@ class ThreadController extends Controller
             }
         }
 
-        Notification::create([
-            'user_id' => $thread->receiver_id,
-            'user_notificator_id' => Auth::id(),
-            'type' => 'new-message',
-            'fossil_id' => $thread->id,
-            'title' => 'Ny besked',
-            'text' => 'En bruger har sendt dig besked.'
-        ]);
+        if($user->role == 'admin') {
+            Notification::create([
+                'user_id' => $thread->receiver_id,
+                'user_notificator_id' => Auth::id(),
+                'type' => 'new-message',
+                'fossil_id' => $thread->id,
+                'title' => 'Ny besked',
+                'text' => 'En bruger har sendt dig besked.'
+            ]);
+        } else {
+            foreach (User::where('role', 'admin')->get() as $admin) {
+                Notification::create([
+                    'user_id' => $admin->id,
+                    'user_notificator_id' => $user->id,
+                    'type' => 'new-message',
+                    'fossil_id' => $thread->id,
+                    'title' => 'Ny besked',
+                    'text' => 'En bruger har sendt dig besked.'
+                ]);
+            }
+        }
 
         return Inertia::location(route('threads.get', ['thread' => $thread->id]));
     }

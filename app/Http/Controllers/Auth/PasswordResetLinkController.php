@@ -56,7 +56,7 @@ class PasswordResetLinkController extends Controller
 
         if ($first->answer != $request->first) {
             throw ValidationException::withMessages([
-                'first' => ['Answer is wrong'],
+                'first' => ['Svaret er forkert'],
             ]);
         }
 
@@ -64,7 +64,7 @@ class PasswordResetLinkController extends Controller
 
         if ($second->answer != $request->second) {
             throw ValidationException::withMessages([
-                'second' => ['Answer is wrong'],
+                'second' => ['Svaret er forkert'],
             ]);
         }
 
@@ -72,7 +72,7 @@ class PasswordResetLinkController extends Controller
 
         if ($third->answer != $request->third) {
             throw ValidationException::withMessages([
-                'third' => ['Answer is wrong'],
+                'third' => ['Svaret er forkert'],
             ]);
         }
         DB::statement("DELETE FROM `password_reset_tokens` WHERE username = '$user->username'");

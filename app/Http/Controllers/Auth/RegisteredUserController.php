@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
+use App\Mail\SendOTPMail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -53,21 +54,17 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $text = "<p>Velkommen til MitFossil!</p>
-                 <p>Tak for at oprette dig som bruger på MitFossil og slutte dig til fællesskabet. Det er vigtigt at huske, at MitFossil kun er til indsendelse og identifikation af fossiler fundet i Danmark.</p>
-                 <p>Du mangler kun et sidste skridt for at være helt klar. Bekræft din e-mailadresse ved at trykke på knappen nedenunder :D</p>
-                 <p>Gå til <a href='".route('login')."'></a> og log ind på din konto med engangsadgangskoden: <b>$otp</b></p>";
 
-//        $text = 'Your OTP password to login to Mitfossil - ' . $otp;
+        Mail::to($request->email)->send(new SendOTPMail($otp, route('login')));
+
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
-        Mail::to($request->email)->send(new SendOTP(['body' => $text], 'Bekræft e-mailadresse'));
         Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
 
-        return redirect(route('register.confirm'));
+        return redirect(route('register.confirm', $user->username));
     }
 
-    public function confirmPage(): Response
+    public function confirmPage(string $username): Response
     {
-        return Inertia::render('Auth/ConfirmRegister');
+        return Inertia::render('Auth/ConfirmRegister', compact('username'));
     }
 }

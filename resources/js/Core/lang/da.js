@@ -32,7 +32,7 @@ export default {
         },
         register: {
             title: 'Opret bruger',
-            text: 'For at kunne indsende fossiler til MitFossil og hjælpe med identifikation skal du oprette en bruger.',
+            text: 'For at kunne indsende fossiler til MitFossil og hjælpe med identifikation skal du oprette en bruger. Vælg et brugernavn og skriv din e-mailadresse. Når du klikker ‘Opret bruger’ vil du få tilsendt en engangskode til din e-mailadresse, som du skal bruge for at bekræfte din bruger.',
             action: 'Opret bruger',
             profile_text: 'Har du allerede en bruger?',
             login_text: 'Log ind her',
@@ -62,9 +62,10 @@ export default {
             logout_text: 'Log ud'
         },
         confirm_register: {
-            title: 'Konto blev registreret',
-            text: 'Tak for din tilmelding! Vi har sendt dig engangsadgangskode til login via e-mail. Gå til login-siden eller tryk på knappen nedenfor for at godkende.',
-            action: 'Gå til login'
+            title: 'Bekræft din bruger',
+            text: 'Tak for din tilmelding! For at bekræfte din bruger skal du lige indtaste den engangskode, som vi har sendt i en e-mail til dig. Hvis du ikke har modtaget en e-mail, så tjek eventuelt din spam.',
+            action: 'Bekræft bruger med engangskode',
+            label: 'Engangskode'
         },
         my_page: {
             title: 'Overblik',
@@ -225,7 +226,7 @@ export default {
             delete_action: 'Anmod sletning',
             delete_confirm: 'Er du sikker på, at du vil slette din bruger?',
             delete_confirm_text: 'Når din bruger bliver slettet vil alle tilknyttede brugeroplysninger blive permanent slettet og vil ikke længere kunne tilgås. Dine billeder, kommentarer og øvrige funddata, som du har lagt ind på MitFossil, vil dog ikke blive slettet men blot anonymiseret. Indtast venligst din adgangskode for at bekræfte, at du vil slette din bruger permanent. En administrator vil derefter hurtigst muligt behandle din anmodning.',
-            questions: 'Answer security questions',
+            questions: 'Nu er du næsten klar! Besvar venligst følgende sikkerhedsspørgsmål. Gem dine svar et sted, så du kan huske dem, da de skal bruges, hvis du skulle glemme din adgangskode.',
         },
         resources: {
             title: 'Ressourcer',
@@ -543,6 +544,7 @@ export default {
         question_first: 'Hvilket husnummer havde den første adresse, du boede på?',
         question_second: 'Hvilken sport/fritidsaktivitet var den første, du gik til?',
         question_third: 'Hvilken by voksede din mor op i?',
+        question_note: 'Skriv din egen adgangskode',
         thread_receiver: 'Receiver',
         thread_title: 'Title',
         thread_category: 'Category',

@@ -55,10 +55,10 @@ const form = useForm({
                                 </div>
                             </div>
                         </div>
-
+                        <p class="mt-3"><b>{{$t('form.question_note')}}</b></p>
                         <div class="row mt-3">
                             <div class="col-12 d-flex justify-content-end">
-                                <PrimaryButton type="submit" :disabled="form.processing">Save</PrimaryButton>
+                                <PrimaryButton type="submit" :disabled="form.processing">Færdiggør brugeroprettelse</PrimaryButton>
                             </div>
                         </div>
                     </form>
