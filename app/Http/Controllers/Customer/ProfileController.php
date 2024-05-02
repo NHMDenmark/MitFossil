@@ -19,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -61,7 +62,8 @@ class ProfileController extends Controller
         $request->validate([
             'first' => ['required', 'string'],
             'second' => ['required', 'string'],
-            'third' => ['required', 'string']
+            'third' => ['required', 'string'],
+            'password' => ['required', Password::defaults(), 'confirmed']
         ]);
 
         UserSecurityQuestion::create([

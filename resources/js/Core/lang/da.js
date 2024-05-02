@@ -219,7 +219,7 @@ export default {
             verify_action: 'Klik her for at sende en ny bekræftelsesmail.',
             verify_text: 'En ny bekræftelsesmail er blevet sendt til din e-mailadresse. Tjek eventuelt spam.',
             update_password: 'Skift adgangskode',
-            update_questions: 'Opdater svar',
+            update_questions: 'Ændre svar på sikkerhedsspørgsmål',
             delete_account: 'Slet bruger',
             delete_text: 'Når din bruger er slettet, vil alle tilknyttede brugeroplysninger blive permanent slettet og vil ikke længere kunne tilgås.',
             delete_sent_text: 'Din anmodning om sletning af bruger er blevet sendt.',

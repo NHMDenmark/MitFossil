@@ -101,9 +101,9 @@ const form = useForm({
                             <p class="heading-s fw-700 mb-3">{{$t('form.question_first')}}</p>
                             <p>{{userQuestions[1] ?? '-'}}</p>
                             <p class="heading-s fw-700 mb-3">{{$t('form.question_second')}}</p>
-                            <p>{{userQuestions[1] ?? '-'}}</p>
+                            <p>{{userQuestions[2] ?? '-'}}</p>
                             <p class="heading-s fw-700 mb-3">{{$t('form.question_third')}}</p>
-                            <p>{{userQuestions[1] ?? '-'}}</p>
+                            <p>{{userQuestions[3] ?? '-'}}</p>
                         </div>
                     </form>
                 </div>

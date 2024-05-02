@@ -14,6 +14,7 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputImage from "@/Components/InputImage.vue";
 import InputTextInline from "@/Components/InputTextInline.vue";
+import TextInput from "@/Components/TextInput.vue";
 
 const user = usePage().props.auth.user;
 
@@ -21,7 +22,9 @@ const form = useForm({
     user: user,
     first: null,
     second: null,
-    third: null
+    third: null,
+    password: null,
+    password_confirmation: null
 });
 </script>
 
@@ -56,6 +59,36 @@ const form = useForm({
                             </div>
                         </div>
                         <p class="mt-3"><b>{{$t('form.question_note')}}</b></p>
+                        <div class="row">
+                            <div class="col col-sm-6 mt-4">
+                                <InputLabel for="password" :value="$t('form.new_password')" />
+
+                                <TextInput
+                                    id="password"
+                                    ref="passwordInput"
+                                    v-model="form.password"
+                                    type="password"
+                                    class="mt-1 block w-full"
+                                    autocomplete="new-password"
+                                />
+
+                                <InputError :message="form.errors.password" class="mt-2" />
+                            </div>
+
+                            <div class="col col-sm-6 mt-4">
+                                <InputLabel for="password_confirmation" :value="$t('form.repeat_new_password')" />
+
+                                <TextInput
+                                    id="password_confirmation"
+                                    v-model="form.password_confirmation"
+                                    type="password"
+                                    class="mt-1 block w-full"
+                                    autocomplete="new-password"
+                                />
+
+                                <InputError :message="form.errors.password_confirmation" class="mt-2" />
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col-12 d-flex justify-content-end">
                                 <PrimaryButton type="submit" :disabled="form.processing">Færdiggør brugeroprettelse</PrimaryButton>

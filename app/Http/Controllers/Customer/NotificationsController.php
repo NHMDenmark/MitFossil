@@ -11,7 +11,7 @@ use Inertia\Inertia;
 class NotificationsController extends Controller
 {
     public function index(Request $request) {
-        $notifications = Notification::getNotifications( $request->user()->id );
+        $notifications = Notification::getNotifications($request->user()->id);
 
         return Inertia::render('Customer/Notification/Index', [
             'notifications' => $notifications,

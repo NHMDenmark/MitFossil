@@ -95,6 +95,7 @@ class ThreadController extends Controller
                 ]);
             }
         }
+
         if($user->role == 'admin') {
             Notification::create([
                 'user_id' => $receiverID,
@@ -102,7 +103,7 @@ class ThreadController extends Controller
                 'type' => 'new-message',
                 'fossil_id' => $thread->id,
                 'title' => 'Ny besked',
-                'text' => 'En bruger har sendt dig besked.'
+                'text' => 'Du har modtaget en ny besked.'
             ]);
         } else {
             foreach (User::where('role', 'admin')->get() as $admin) {
@@ -112,7 +113,7 @@ class ThreadController extends Controller
                     'type' => 'new-message',
                     'fossil_id' => $thread->id,
                     'title' => 'Ny besked',
-                    'text' => 'En bruger har sendt dig besked.'
+                    'text' => 'Du har modtaget en ny besked.'
                 ]);
             }
         }
@@ -231,13 +232,18 @@ class ThreadController extends Controller
         }
 
         if($user->role == 'admin') {
+            $receiverID = $thread->receiver_id;
+            $notificationUser = User::find($receiverID);
+            if($notificationUser->role == 'admin') {
+                $receiverID = $thread->sender_id;
+            }
             Notification::create([
-                'user_id' => $thread->receiver_id,
+                'user_id' => $receiverID,
                 'user_notificator_id' => Auth::id(),
                 'type' => 'new-message',
                 'fossil_id' => $thread->id,
                 'title' => 'Ny besked',
-                'text' => 'En bruger har sendt dig besked.'
+                'text' => 'Du har modtaget en ny besked.'
             ]);
         } else {
             foreach (User::where('role', 'admin')->get() as $admin) {
@@ -247,7 +253,7 @@ class ThreadController extends Controller
                     'type' => 'new-message',
                     'fossil_id' => $thread->id,
                     'title' => 'Ny besked',
-                    'text' => 'En bruger har sendt dig besked.'
+                    'text' => 'Du har modtaget en ny besked.'
                 ]);
             }
         }
