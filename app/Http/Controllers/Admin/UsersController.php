@@ -70,12 +70,6 @@ class UsersController extends Controller
 
     function destroy(Request $request){
         $user = User::findOrFail($request->id);
-
-        $user->username = null;
-        $user->password = null;
-        $user->remember_token = null;
-        $user->active = false;
-
-        $user->save();
+        $user->delete();
     }
 }
