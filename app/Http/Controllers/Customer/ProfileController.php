@@ -18,6 +18,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
@@ -86,6 +87,7 @@ class ProfileController extends Controller
 
         $user = Auth::user();
         $user->answered_questions = true;
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect(RouteServiceProvider::HOME);
