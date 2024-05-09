@@ -57,7 +57,7 @@ class NewPasswordController extends Controller
 
             event(new PasswordReset($user));
 
-            $status = 'Reset successful';
+            $status = 'Ny adgangskode blev oprettet';
 
             return redirect()->route('login')->with('status', __($status));
         } else {

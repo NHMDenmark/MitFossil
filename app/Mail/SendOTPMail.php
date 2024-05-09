@@ -16,7 +16,7 @@ class SendOTPMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $otp, public string $url)
+    public function __construct(public string $otp, public string $username, public string $url)
     {
         //
     }
@@ -27,7 +27,7 @@ class SendOTPMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Bekræft e-mailadresse',
+            subject: 'Bekræft bruger',
         );
     }
 

@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
 
-        Mail::to($request->email)->send(new SendOTPMail($otp, route('login')));
+        Mail::to($request->email)->send(new SendOTPMail($otp, $request->username, ''));
 
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
         Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
