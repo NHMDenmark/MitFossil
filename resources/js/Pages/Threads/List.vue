@@ -14,15 +14,15 @@ defineProps({ threads: Array, user: Object })
             <div class="d-flex flex-column flex-xl-row gap-45 align-items-start">
                 <div class="col bg-white border-light shadow rounded p-4 pt-5">
                     <div class="d-flex flex-column text-center">
-                        <PrimaryButton class="me-2 align-self-end" type="link" :url="route('threads.create')">Send new message</PrimaryButton>
-                        <h2 class="mb-4">Threads</h2>
+                        <PrimaryButton class="me-2 align-self-end" type="link" :url="route('threads.create')">Opret en ny samtale</PrimaryButton>
+                        <h2 class="mb-4">Kontakt MitFossils {{user.role == 'admin' ? 'brugere' : 'administratorer'}}</h2>
                         <div v-if="threads.length > 0" class="d-flex flex-column">
                             <table class="table table-responsive-xxl">
                                 <tr>
-                                    <th>Created By</th>
-                                    <th>Receiver</th>
-                                    <th>Category</th>
-                                    <th>Title</th>
+                                    <th>Oprettet af</th>
+                                    <th>Sendt til</th>
+                                    <th>Emne</th>
+                                    <th>Overskrift</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -31,12 +31,12 @@ defineProps({ threads: Array, user: Object })
                                     <td>{{ thread.receiver.username }}</td>
                                     <td>{{ thread.category }}</td>
                                     <td>{{ thread.title }}</td>
-                                    <td>{{ thread.status }}</td>
-                                    <td><PrimaryButton type="link" :url="route('threads.get', thread.id)">View</PrimaryButton></td>
+                                    <td>{{ thread.status === 'open' ? 'Åben' : 'Lukket' }}</td>
+                                    <td><PrimaryButton type="link" :url="route('threads.get', thread.id)">Åbn samtalen</PrimaryButton></td>
                                 </tr>
                             </table>
                         </div>
-                        <span v-else>Nothing to show yet</span>
+                        <span v-else>Ingen oprettede samtaler</span>
                     </div>
                 </div>
             </div>

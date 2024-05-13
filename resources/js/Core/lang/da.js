@@ -340,7 +340,7 @@ export default {
             emuseum_text: 'eMuseum',
             resources_text: 'Ressourcer',
             notifications_text: 'Meddelelser',
-            threads: 'Threads'
+            threads: 'Kontakt'
         },
         guest: {
             title: 'Statens Naturhistoriske Museum',

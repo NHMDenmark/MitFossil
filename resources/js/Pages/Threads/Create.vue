@@ -2,6 +2,7 @@
 import {Head} from "@inertiajs/vue3";
 import CustomerLayout from "@/Layouts/CustomerLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -28,6 +29,12 @@ function manageAttachments(event) {
     }
 }
 </script>
+<style>
+.button_container{
+    display: flex;
+    align-items: flex-end;
+}
+</style>
 
 <template>
     <Head :title="$t('pages.threads.create_title')" />
@@ -36,8 +43,8 @@ function manageAttachments(event) {
         <div class="flex-content container-fluid p-3 p-md-45 bg-white-3">
             <div class="d-flex flex-column flex-xl-row gap-45 align-items-start">
                 <form @submit.prevent="form.post(route('threads.store'))" class="col bg-white border-light shadow rounded p-4 pt-5">
+                    <h3 class="mb-4">Opret en ny samtale med MitFossils {{user.role == 'admin' ? 'brugere' : 'administratorer'}}</h3>
                     <div class="col-12 mt-3" v-if="user.role === 'admin'">
-                        <h3 class="mb-4">Send a new message</h3>
                         <InputLabel for="receiver_id" :value="$t('form.thread_receiver')" />
 
                         <SelectInput
@@ -49,7 +56,7 @@ function manageAttachments(event) {
                         <InputError class="mt-2" :message="form.errors.receivers" />
                     </div>
                     <div class="col-12 mt-3">
-                        <InputLabel for="title" :value="$t('form.thread_title')" />
+                        <InputLabel for="title" :value="'Overskrift'" />
 
                         <TextInput
                             id="title"
@@ -63,7 +70,7 @@ function manageAttachments(event) {
                         <InputError class="mt-2" :message="form.errors.title" />
                     </div>
                     <div class="col-12 mt-3">
-                        <InputLabel for="category" :value="$t('form.thread_category')" />
+                        <InputLabel for="category" :value="'Emne'" />
 
                         <SelectInput
                             id="receiver_id"
@@ -74,7 +81,7 @@ function manageAttachments(event) {
                         <InputError class="mt-2" :message="form.errors.category" />
                     </div>
                     <div class="col-12 mt-3">
-                        <InputLabel class="mb-2" :value="$t('form.thread_message_text')"></InputLabel>
+                        <InputLabel class="mb-2" :value="'Besked'"></InputLabel>
 
                         <Editor v-model="form.text" editorStyle="height: 320px">
                             <template v-slot:toolbar>
@@ -90,11 +97,14 @@ function manageAttachments(event) {
                         <InputError class="mt-2" :message="form.errors.text" />
                     </div>
                     <div class="col-12 mt-3 d-flex flex-column">
-                        <InputLabel class="mb-2" :value="$t('form.thread_message_attachments')"></InputLabel>
+                        <InputLabel class="mb-2" :value="'Vedhæftede filer'"></InputLabel>
 
                         <input type="file" name="attachments" id="attachments" multiple @change="manageAttachments"/>
                     </div>
-                    <PrimaryButton class="mt-6 align-self-end" type="submit">Send</PrimaryButton>
+                    <div class="button_container">
+                        <PrimaryButton class="mt-6" style="margin-right: 10px" type="submit">Send</PrimaryButton>
+                        <PrimaryButton type="link" :url="route('threads.index')">Fortryd</PrimaryButton>
+                    </div>
                 </form>
             </div>
         </div>

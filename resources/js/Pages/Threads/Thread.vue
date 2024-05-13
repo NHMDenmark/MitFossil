@@ -2,12 +2,15 @@
 import {Head} from "@inertiajs/vue3";
 import CustomerLayout from "@/Layouts/CustomerLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import SelectInput from "@/Components/SelectInput.vue";
 import { Link, useForm, usePage, router } from '@inertiajs/vue3';
 import Editor from 'primevue/editor';
+import Modal from "@/Components/Modal.vue";
+import {ref} from "vue";
 
 defineProps({ messages: Array, sender: Object, receiver: Object, user: Object })
 
@@ -16,6 +19,14 @@ const form = useForm({
     text: '',
     attachments: [],
 });
+const modal = ref({})
+const type = ref(null)
+const delete_id = ref(null)
+const parent_id = ref(null)
+const scope = ref({
+    title: null,
+    description: null
+})
 
 function manageAttachments(event) {
     const files = event.target.files
@@ -23,6 +34,24 @@ function manageAttachments(event) {
     for (let i = 0; i < files.length; i++) {
         form.attachments.push(files[i]);
     }
+}
+
+const onDeleteClick = (id, typeVal, parentID = null) => {
+    scope.value.title = 'Slet ' + (typeVal === 'message' ? 'beskeden' : 'samtalen');
+    type.value = typeVal
+    parent_id.value = parentID
+    delete_id.value = id
+    modal.value.show();
+};
+
+const confirmAction = () => {
+    if(type.value === 'message') {
+        window.location.href = '/threads/' + parent_id.value + '/' + delete_id.value + '/delete'
+    } else {
+        window.location.href = '/threads/delete/' + delete_id.value
+    }
+
+    modal.value.hide();
 }
 
 </script>
@@ -35,14 +64,15 @@ function manageAttachments(event) {
             <div class="flex-column flex-xl-row gap-45 align-items-start">
                 <form @submit.prevent="form.post(route('threads.storeMessage', {thread: messages[0].thread.id}));" class="col bg-white border-light shadow rounded p-4 pt-5">
                     <div class="d-flex w-100 justify-content-between">
-                        <h2>{{ messages[0].thread.status == 'open' ? 'Reply to the thread' : 'View thread' }}</h2>
+                        <h2>{{ messages[0].thread.status == 'open' ? 'Send en besked i samtalen' : 'Læs samtalen' }}</h2>
                         <div class="d-flex">
-                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" style="margin-right: 10px;" type="link" :url="route('threads.delete', {thread: messages[0].thread.id})">Delete</PrimaryButton>
-                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" type="link" :url="route('threads.change_status', {thread: messages[0].thread.id, status: messages[0].thread.status == 'closed' ? 'open' : 'closed'})">{{ messages[0].thread.status == 'closed' ? 'Open' : 'Close' }}</PrimaryButton>
+                            <PrimaryButton class="align-self-end" style="margin-right: 10px;" type="link" :url="route('threads.index')">Tilbage</PrimaryButton>
+                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" style="margin-right: 10px;" type="button" @click="onDeleteClick(messages[0].thread.id, 'thread')">Slet samtalen</PrimaryButton>
+                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" type="link" :url="route('threads.change_status', {thread: messages[0].thread.id, status: messages[0].thread.status == 'closed' ? 'open' : 'closed'})">{{ messages[0].thread.status == 'closed' ? 'Åbn samtalen' : 'Luk samtalen' }}</PrimaryButton>
                         </div>
                     </div>
                     <div class="col-12 mt-3" v-if="messages[0].thread.status == 'open'">
-                        <InputLabel class="mb-2" :value="$t('form.thread_message_text')"></InputLabel>
+                        <InputLabel class="mb-2" :value="'Besked'"></InputLabel>
 
                         <Editor v-model="form.text" editorStyle="height: 320px">
                             <template v-slot:toolbar>
@@ -58,7 +88,7 @@ function manageAttachments(event) {
                         <InputError class="mt-2" :message="form.errors.text" />
                     </div>
                     <div class="col-12 mt-3 d-flex flex-column" v-if="messages[0].thread.status == 'open'">
-                        <InputLabel class="mb-2" :value="$t('form.thread_message_attachments')"></InputLabel>
+                        <InputLabel class="mb-2" :value="'Vedhæftede filer'"></InputLabel>
 
                         <input type="file" name="attachments" id="attachments" multiple @change="manageAttachments"/>
                     </div>
@@ -71,10 +101,25 @@ function manageAttachments(event) {
                         <div v-html="message.body"></div>
                         <span v-if="message.attachments.length > 0" class="mt-6">Attachments:</span>
                         <a v-for="attachment in message.attachments" :href="'attachment/' + attachment.name" :download="attachment.name">{{ attachment.name }}</a>
-                        <PrimaryButton v-if="user.role == 'admin'" class="mt-3" type="link" :url="route('threads.delete_message', {message: message.id, thread: messages[0].thread.id})">Delete message</PrimaryButton>
+                        <PrimaryButton v-if="user.role == 'admin'" class="mt-3" type="button" @click="onDeleteClick(message.id, 'message', message.thread.id)" >Slet beskeden</PrimaryButton>
                     </div>
                 </div>
             </div>
         </div>
+        <Modal
+            ref="modal"
+            :show-cancel-button="true"
+            :title="scope.title"
+            :text-cancel-button="$t('components.modal.cancel')"
+            :textOkButton="$t('components.modal.accept')"
+            @ok="confirmAction">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text-m">Er du sikker?</p>
+                    </div>
+                </div>
+            </div>
+        </Modal>
     </CustomerLayout>
 </template>
