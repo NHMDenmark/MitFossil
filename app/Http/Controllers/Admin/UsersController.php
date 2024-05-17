@@ -70,7 +70,7 @@ class UsersController extends Controller
 
     function destroy(Request $request){
         $user = User::findOrFail($request->id);
-        $user->username = '';
+        $user->username = null;
         $user->save();
         $user->delete();
     }

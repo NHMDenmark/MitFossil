@@ -60,12 +60,29 @@ class ThreadController extends Controller
         ]);
 
         $user = Auth::user();
-        if($user->role == 'admin') {
-            $receiverID = $request->receiver_id;
+
+        if($request->input('all_users')){
+            $receivers = User::where('role', '!=', 'admin')->whereNotNull('username')->get();
+            foreach ($receivers as $receiver) {
+                $this->sendThread($receiver->id, $user, $request);
+            }
+            return redirect(route('threads.index'));
         } else {
-            $receiverID = User::where('role', 'admin')->first()->id;
+            if($user->role == 'admin') {
+                $receiverID = $request->receiver_id;
+            } else {
+                $receiverID = User::where('role', 'admin')->first()->id;
+            }
+            $thread = $this->sendThread($receiverID, $user, $request);
+            return redirect(route('threads.get', ['thread' => $thread->id]));
         }
 
+
+
+    }
+
+    private function sendThread(int $receiverID, $user, Request $request)
+    {
         $thread = Thread::create([
             'receiver_id' => $receiverID,
             'sender_id' => $user->id,
@@ -118,8 +135,7 @@ class ThreadController extends Controller
             }
         }
 
-
-        return redirect(route('threads.get', ['thread' => $thread->id]));
+        return $thread;
     }
 
     public function changeStatus(Thread $thread, $status)

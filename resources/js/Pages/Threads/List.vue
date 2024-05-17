@@ -27,8 +27,8 @@ defineProps({ threads: Array, user: Object })
                                     <th></th>
                                 </tr>
                                 <tr v-for="thread in threads">
-                                    <td>{{ thread.sender.username }}</td>
-                                    <td>{{ thread.receiver.username }}</td>
+                                    <td>{{ thread.sender ? thread.sender.username : 'Slettet bruger' }}</td>
+                                    <td>{{ thread.receiver ? thread.receiver.username : 'Slettet bruger' }}</td>
                                     <td>{{ thread.category }}</td>
                                     <td>{{ thread.title }}</td>
                                     <td>{{ thread.status === 'open' ? 'Åben' : 'Lukket' }}</td>

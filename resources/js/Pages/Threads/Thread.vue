@@ -96,7 +96,7 @@ const confirmAction = () => {
                 </form>
                 <div class="mt-4 flex-column flex-xl-row gap-45 align-items-start col bg-white border-light shadow rounded p-0 col-divider">
                     <div class="d-flex flex-column p-4" v-for="message in messages">
-                        <span class="mb-2">{{ message.sender.username }}</span>
+                        <span class="mb-2">{{ message.sender ? message.sender.username : 'Slettet bruger' }}</span>
                         <span style="color: gray" class="mb-4">{{ message.created_at }}</span>
                         <div v-html="message.body"></div>
                         <span v-if="message.attachments.length > 0" class="mt-6">Attachments:</span>
