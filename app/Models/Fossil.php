@@ -230,7 +230,7 @@ class Fossil extends Model
             ->with('fossil_comments', function (HasMany $q) {
                 return $q->with('user', function (BelongsTo $q2){
                     return $q2->select('id', 'username');
-                })->orderByDesc('created_at');;
+                })->orderByDesc('created_at');
             })
             ->with('vote_scientific_user', function (BelongsTo $q){
                 return $q->select('id', 'copyright_rule_id', 'username');
@@ -271,7 +271,7 @@ class Fossil extends Model
                     }
                     return $q;
                 })
-                ->orWhereHas('username', function ($q) use ($options){
+                ->orWhereHas('user', function ($q) use ($options){
                     return $q->where('username', 'like', '%'. $options["search"] . '%');
                 })
                 ->orWhereHas('country', function ($q) use ($options){
