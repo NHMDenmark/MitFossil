@@ -539,7 +539,7 @@ h1,h2,h3,h4,h5,h6{
     transition: all .3s ease-in-out;
 }
 .gallery-view .gallery-view-item:hover{
-    transform: scale(.98);
+    /*transform: scale(.98);*/
 }
 .gallery-view .gallery-view-item .gallery-view-action {
     padding: 0 14px 14px 14px;

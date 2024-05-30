@@ -254,6 +254,10 @@ class Fossil extends Model
                 ->orWhere('group', 'like', '%'. $options["search"] . '%')
                 ->orWhere('formation', 'like', '%'. $options["search"] . '%')
                 ->orWhere('member', 'like', '%'. $options["search"] . '%')
+                ->orWhere('identifier', 'like', '%'. $options["search"] . '%')
+                ->orWhere('collector', 'like', '%'. $options["search"] . '%')
+                ->orWhere('date_find', 'like', '%'. $options["search"] . '%')
+                ->orWhere('personal_id', 'like', '%'. $options["search"] . '%')
                 ->orWhereHas('fossil_identify', function ($q) use ($options, $taxonomy) {
                     if($taxonomy !== null) {
                         $q->where($taxonomy['field'], '=', $taxonomy['value']);

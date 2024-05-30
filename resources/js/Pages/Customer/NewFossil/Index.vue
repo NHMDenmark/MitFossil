@@ -12,10 +12,11 @@ import Notes from "@/Pages/Customer/NewFossil/partials/Notes.vue";
 import Summary from "@/Pages/Customer/NewFossil/partials/Summary.vue";
 import ModalGuide from '@/Components/partials/Modal/ModalGuide.vue';
 import { v4 as uuidv4 } from 'uuid';
+import InputError from "@/Components/InputError.vue";
 
 const state = ref(0);
 const modalGuide = ref();
-
+const form_sent = ref(false)
 const form = useForm({
     images: [{
         id: uuidv4(),
@@ -60,11 +61,19 @@ const form = useForm({
     date_find: null,
     notes: null,
     personal_id: null,
-    fossil_common: null
+    fossil_common: null,
+    form_sent: false
 });
 
 function save() {
-    form.post(route('customer.new-fossil.store'));
+    if(!form_sent.value) {
+        form_sent.value = true
+        form.post(route('customer.new-fossil.store'), {
+            onFinish: () => {form_sent.value = false},
+            onError: () => {form_sent.value = false},
+        });
+    }
+
 }
 </script>
 
@@ -102,6 +111,7 @@ function save() {
                         </div>
                     </div>
                     <div class="py-4 p-sm-4">
+                        <InputError class="mt-2" :message="form.errors.coordinates" />
                         <Images v-if="state === 0" :form="form" @continue="state = 1"></Images>
                         <Classification v-if="state === 1" :form="form" @continue="state = 2" @previous="state = 0"></Classification>
                         <Location v-if="state === 2" :form="form" @continue="state = 3" @previous="state = 1"></Location>

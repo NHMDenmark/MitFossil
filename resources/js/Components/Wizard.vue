@@ -22,10 +22,10 @@
                                 <div class="wz d-flex flex-column py-2 w-100">
                                     <span class="wz name">{{option.label}}</span>
                                     <template v-if="subOptions">
-                                        
+
                                         <span class="wz sub" v-for="sub in subOptions">
                                             <span v-if="option[sub]">
-                                                {{ $t('form.fossil_' + sub) }}: {{ option[sub] }}
+                                                <b>{{ $t('form.fossil_' + sub) }}</b>: {{ option[sub] }}
                                             </span>
                                         </span>
                                     </template>

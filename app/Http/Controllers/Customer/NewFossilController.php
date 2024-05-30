@@ -67,6 +67,18 @@ class NewFossilController extends Controller
     public function store(FossilRequest $request)
     {
         $data = $request->all();
+
+        $lat = $request->input('latitude');
+        $long = $request->input('longitude');
+        if($lat && $long) {
+            $fossilsWithSameCord = Fossil::where('latitude', 'LIKE', '%'.number_format($lat, 3).'%')
+                ->where('longitude', 'LIKE', '%'.number_format($long, 3).'%')
+                ->first();
+            if($fossilsWithSameCord) {
+                return Redirect::back()->withErrors(['coordinates' => 'Koordinater var allerede taget, prøv at bruge en anden!']);
+            }
+        }
+
         $fossil = new Fossil($data);
         $fossil->user_id = $request->user()->id;
         $fossil->copyright_rule_id = $request->user()->copyright_rule_id;
