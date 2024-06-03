@@ -201,7 +201,7 @@ async function loadData(options = null) {
                     <div class="p-3">
                         <h4 class="heading-s d-flex flex-wrap divider-right-dash fw-700">
                             ${ commom }
-                            ${ lower } 
+                            ${ lower }
                         </h4>
                         <div class="text-s d-flex flex-column text-center">
                           <span class="w-100 text-center mb-2 d-flex gap-1 justify-content-center">${ starsString }</span>

@@ -1667,6 +1667,8 @@ button.gm-ui-hover-effect{
     border-radius: 30px;
     top: 5px!important;
     right: 5px!important;
+    width: 32px !important;
+    height: 32px !important;
 }
 button.gm-ui-hover-effect span{
     width: 18px!important;
@@ -1676,6 +1678,9 @@ button.gm-ui-hover-effect span{
 .modal-dialog {
     margin-right: auto;
     margin-left: auto;
+}
+.gm-style-iw-chr {
+    height: 0 !important;
 }
 
 /*Accordion*/
