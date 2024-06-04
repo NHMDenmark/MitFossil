@@ -30,6 +30,7 @@ use App\Models\SpecificEpithet;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -71,11 +72,12 @@ class NewFossilController extends Controller
         $lat = $request->input('latitude');
         $long = $request->input('longitude');
         if($lat && $long) {
-            $fossilsWithSameCord = Fossil::where('latitude', 'LIKE', '%'.number_format($lat, 3).'%')
-                ->where('longitude', 'LIKE', '%'.number_format($long, 3).'%')
+            $fossilsWithSameCord = Fossil::where('latitude', 'LIKE', '%'.$this->truncateToThreeDecimalPlaces($lat).'%')
+                ->where('longitude', 'LIKE', '%'.$this->truncateToThreeDecimalPlaces($long).'%')
                 ->first();
             if($fossilsWithSameCord) {
-                return Redirect::back()->withErrors(['coordinates' => 'Koordinater var allerede taget, prøv at bruge en anden!']);
+                $data['latitude'] = $this->replaceRandomDigits($lat);
+                $data['longitude'] = $this->replaceRandomDigits($long);
             }
         }
 
@@ -366,5 +368,43 @@ class NewFossilController extends Controller
         $param = $route === 'customer.new-fossil.edit' ? $fossil->id : [ "fossil" => $fossil->id ];
 
         return Redirect::route($route, $param);
+    }
+
+    function truncateToThreeDecimalPlaces($number): string
+    {
+        $explodedNumber = explode('.', $number);
+        if(!$afterDot = Arr::get($explodedNumber, 1)) {
+            return $number;
+        } else {
+            return $explodedNumber[0] . '.' . substr($afterDot, 0, 3);
+        }
+    }
+
+
+    private function replaceRandomDigits($number): float
+    {
+        $numberStr = (string) $number;
+
+        $dotPos = strpos($numberStr, '.');
+        if ($dotPos === false) {
+            return $number;
+        }
+
+        $beforeDot = substr($numberStr, 0, $dotPos + 1);
+        $afterDot = substr($numberStr, $dotPos + 1);
+
+        if (strlen($afterDot) < 5) {
+            return $number;
+        }
+
+        $randomDigit1 = rand(0, 9);
+        $randomDigit2 = rand(0, 9);
+
+        $afterDot[2] = $randomDigit1;
+        $afterDot[3] = $randomDigit2;
+
+        $newNumberStr = $beforeDot . $afterDot;
+
+        return (float) $newNumberStr;
     }
 }
