@@ -106,7 +106,7 @@ onUnmounted(() => {
 });
 
 async function onScroll(event) {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    if ((window.innerHeight + window.scrollY + 2) >= document.body.offsetHeight) {
         if(fossils.value.next_page_url) {
             // Si se llega al final de la página, cargar más datos
             const opt = {

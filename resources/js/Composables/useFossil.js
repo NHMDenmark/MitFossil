@@ -215,13 +215,15 @@ export function getLowesTaxonomy (identify, unknown){
     identify.fossil_phylum = identify.fossil_phylum ? identify.fossil_phylum : unknown;
     identify.fossil_kingdom = identify.fossil_kingdom ? identify.fossil_kingdom : unknown;
 
-    if(identify.fossil_genre && identify.fossil_genre !== unknown) {
-        if(identify.specific_epithet && identify.specific_epithet !== unknown) {
-            return '<i>' + identify.fossil_genre + ' ' + identify.specific_epithet + '</i>';
-        } else {
-            return '<i>' + identify.fossil_genre + '</i> sp.';
-        }
+    if(identify.fossil_genre && identify.fossil_genre !== unknown && identify.specific_epithet && identify.specific_epithet !== unknown) {
+        return '<i>' + identify.fossil_genre + ' ' + identify.specific_epithet + '</i>';
+    } else if(identify.fossil_genre && identify.fossil_genre !== unknown) {
+        return '<i>' + identify.fossil_genre + '</i> sp.';
+    } else if(identify.specific_epithet && identify.specific_epithet !== unknown) {
+        return '<i>' + identify.specific_epithet + '</i>';
     }
+
+
     if(identify.fossil_family && identify.fossil_family !== unknown) {
         return identify.fossil_family;
     }

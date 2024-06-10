@@ -4,7 +4,7 @@ import SelectInput from "@/Components/SelectInput.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, nextTick, onMounted, ref, watch} from "vue";
 import {usePage} from "@inertiajs/vue3";
 import Wizard from "@/Components/Wizard.vue";
 import Accordion from "@/Components/Accordion.vue";
@@ -32,7 +32,7 @@ const accordeon = [
 const onOk = (selected) => {
     let [ model, value ] = selected?.value?.split('_') ?? [ null, null ];
     value = parseInt(value);
-
+    console.log(model, value)
     props.form.eon_id = null;
     props.form.era_id = null;
     props.form.period_id = null;
@@ -73,11 +73,14 @@ const onOk = (selected) => {
         changeEon(selectedValue.value.eon_id, false)
     }
 
-    props.form.eon_id = selectedValue.value?.eon_id ?? null;
-    props.form.era_id = selectedValue.value?.era_id ?? null;
-    props.form.period_id = selectedValue.value?.period_id ?? null;
-    props.form.epoch_id = selectedValue.value?.epoch_id ?? null;
-    props.form.age_id = selectedValue.value?.age_id ?? null;
+
+    nextTick(() => {
+        props.form.eon_id = selectedValue.value?.eon_id ?? null;
+        props.form.era_id = selectedValue.value?.era_id ?? null;
+        props.form.period_id = selectedValue.value?.period_id ?? null;
+        props.form.epoch_id = selectedValue.value?.epoch_id ?? null;
+        props.form.age_id = selectedValue.value?.age_id ?? null;
+    })
 };
 
 const eons = ref(page.props.eons);
@@ -321,7 +324,7 @@ const hasVote = computed(() => {
                             :placeholder="$t('form.unknown')"
                             class="mt-1 block w-full"
                             v-model="form.group"
-                            :disabled="hasVote">                            
+                            :disabled="hasVote">
                         </TextInput>
 
                         <InputError class="mt-2" :message="form.errors.group" />
