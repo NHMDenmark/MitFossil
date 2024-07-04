@@ -78,6 +78,8 @@ class User extends Authenticatable
             $query = $query->where('role' , '!=', 'customer');
         }
 
+        $query = $query->orderBy('username', 'ASC');
+
         if($paginate) {
             return $query->paginate();
         }
@@ -88,6 +90,7 @@ class User extends Authenticatable
     public static function getUserCustomer() {
         return self::query()
             ->where('role' , '=', 'customer')
+            ->orderBy('username', 'ASC')
             ->paginate();
     }
 

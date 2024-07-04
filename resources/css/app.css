@@ -415,7 +415,7 @@ h1,h2,h3,h4,h5,h6{
 
 /* LAYOUT */
 .main{
-    padding-top: 66px;
+    padding-top: 90px;
 }
 .d-grid-dashboard{
     grid-template-columns: repeat(1, 1fr);
@@ -668,7 +668,7 @@ h1,h2,h3,h4,h5,h6{
         grid-template-columns: repeat(3, 1fr);
     }
     .main{
-        padding-top: 86px;
+        padding-top: 100px;
     }
 }
 @media(min-width:1400px){

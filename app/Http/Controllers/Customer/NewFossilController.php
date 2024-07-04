@@ -294,9 +294,9 @@ class NewFossilController extends Controller
                 ]);
 
                 $image->save();
-            }
 
-            $i++;
+                $i++;
+            }
         }
 
         if($urlImages) {
@@ -309,8 +309,9 @@ class NewFossilController extends Controller
                     ]);
 
                     $image->save();
+
+                    $i++;
                 }
-                $i++;
             }
         }
 
