@@ -24,7 +24,7 @@ defineExpose({ focus: () => input.value.focus() });
 
 <template>
     <div class="d-flex flex-column" :class="{'flex-md-row': !labelTop, 'align-items-md-center': !labelTop}">
-        <label class="text-uppercase" :for="name" :class="{'mb-2': labelTop}">
+        <label class="text-uppercase" :for="name" :style="labelTop ? 'width: 100%;' : ''" :class="{'mb-2': labelTop}">
             <span> {{ label }}</span>
         </label>
         <template v-if="type !== 'textarea'">

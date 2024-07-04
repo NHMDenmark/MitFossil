@@ -46,7 +46,7 @@ function manageAttachments(event) {
             <div class="d-flex flex-column flex-xl-row gap-45 align-items-start">
                 <form @submit.prevent="form.post(route('threads.store'))" class="col bg-white border-light shadow rounded p-4 pt-5">
                     <h3 class="mb-4">Opret en ny samtale med MitFossils {{user.role == 'admin' ? 'brugere' : 'administratorer'}}</h3>
-                    <InputCheck v-model="form.all_users" id="noValidated" :value="true"
+                    <InputCheck v-if="user.role === 'admin'" v-model="form.all_users" id="noValidated" :value="true"
                                 class="mt-3 d-inline-flex me-4 mb-2">Send til alle brugere</InputCheck>
 
                     <div class="col-12 mt-3" v-if="user.role === 'admin' && !form.all_users">

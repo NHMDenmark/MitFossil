@@ -47,7 +47,6 @@ function onDelete() {
                                 autofocus
                                 autocomplete="username"
                             />
-
                             <InputError class="mt-2" :message="form.errors.username" />
                         </div>
                     </div>

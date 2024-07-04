@@ -43,12 +43,12 @@ const submit = () => {
         <form @submit.prevent="submit" class="mt-5 w-100 max-w-500 mb-0">
 
             <div class="form-group mt-4">
-                <InputTextInline name="username" v-model="form.username" :label="$t('form.username')" />
+                <InputTextInline name="username" v-model="form.username" :label-top="true" :label="'Brugernavn, må ikke være din e-mail'" />
                 <InputError class="mt-2" :message="form.errors.username" />
             </div>
 
             <div class="form-group mt-4">
-                <InputTextInline name="email" v-model="form.email" :label="$t('form.email_2')" />
+                <InputTextInline name="email" v-model="form.email" :label-top="true" :label="$t('form.email_2')" />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
@@ -64,7 +64,7 @@ const submit = () => {
                     <div id="flush-collapseOne" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionUpload">
                         <div class="accordion-body">
-                            <p class="text-xs"><b>Brugernavn og e-mailadresse</b><br>Du vælger selv dit brugernavn, så længe det overholder MitFossils regler for god adfærd og ikke er af upassende eller krænkende karakter. Det må gerne være dit eget navn, men bemærk, at dit brugernavn vises offentligt på MitFossil i tilknytning til dine fossiler, billeder og kommentarer. Din e-mailadresse vil blive brugt til at sende dig en engangskode for at bekræfte dine bruger. Derudover vil den udelukkende blive brugt til at sende dig meddelelser relateret til MitFossil og projektet ’Danmark Udforsker Fossiler’, som MitFossil er en del af. Din e-mailadresse bliver gemt i en database, som udelukkende administreres af Statens Naturhistoriske Museum, indtil du trækker dit samtykke tilbage og sletter din bruger fra MitFossil, hvormed din e-mailadresse også slettes.</p>
+                            <p class="text-xs"><b>Brugernavn og e-mailadresse</b><br>Du vælger selv dit brugernavn, så længe det overholder MitFossils regler for god adfærd og ikke er af upassende eller krænkende karakter. Det må gerne være dit eget navn, men bemærk, at dit brugernavn vises offentligt på MitFossil i tilknytning til dine fossiler, billeder og kommentarer. Undgå derfor at bruge din e-mailadresse som brugernavn. Din e-mailadresse vil blive brugt til at sende dig en engangskode for at bekræfte dine bruger. Derudover vil den udelukkende blive brugt til at sende dig meddelelser relateret til MitFossil og projektet ’Danmark Udforsker Fossiler’, som MitFossil er en del af. Din e-mailadresse bliver gemt i en database, som udelukkende administreres af Statens Naturhistoriske Museum, indtil du trækker dit samtykke tilbage og sletter din bruger fra MitFossil, hvormed din e-mailadresse også slettes.</p>
                             <p class="text-xs"><b>Brugsret</b><br>Når du lægger et fossil ind på MitFossil, bør du være opmærksom på, at dine billeder af fossiler som udgangspunkt er offentligt tilgængelige for ikke-kommercielle formål, <b>så længe der tydeligt er angivet en kilde i form af brugernavn og MitFossil</b>. Og så længe materialet benyttes i den sammenhæng, det indgår i på MitFossils platforme og i henhold til MitFossils formål. <b>Du kan selv ændre brugsrettighederne (licenserne) for dine billeder under ”Min profil”</b>. Alle funddata for fossilet, såsom fundsted og noter, er tilgængelige for ikke-kommercielle formål. <a target="_blank" href="https://mitfossil.dk/resources/om-mitfossil/regler-og-vilk%C3%A5r">Læs mere om brugsret her</a></p>
                             <p class="text-xs"><b>Persondata</b><br>Når du opretter dig som bruger af MitFossil, samtykker du til, at Statens Naturhistoriske Museum behandler visse persondata om dig. MitFossil følger EU’s regler for behandling af personoplysninger. Du kan læse mere i vores <a target="_blank" href="https://mitfossil.dk/resources/om-mitfossil/regler-og-vilk%C3%A5r">regler og vilkår for MitFossil</a>. Du kan trække dit samtykke tilbage ved at slette din bruger eller kontakte MitFossils administratorer og meddele dem dette. <a target="_blank" href="https://mitfossil.dk/resources/om-mitfossil/kontakt">Læs mere om kontakt her</a>.</p>
                             <p class="text-xs"><b>Adfærd og henvendelse fra Statens Naturhistoriske Museum</b><br>Endvidere accepterer du MitFossils <a href="https://mitfossil.dk/resources/om-mitfossil/regler-og-vilk%C3%A5r" target="_blank">regler for god adfærd.</a></p>

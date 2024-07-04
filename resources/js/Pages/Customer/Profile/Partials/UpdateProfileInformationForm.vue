@@ -55,9 +55,10 @@ function onSelectCopyright(value) {
                                 class="mt-1 block w-full"
                                 v-model="form.username"
                                 required
+                                disabled
                                 autocomplete="username"
                             />
-
+                            <p class="mt-2">Hvis du ønsker at ændre brugernavn, kontakt venligst administratoren.</p>
                             <InputError class="mt-2" :message="form.errors.username" />
                         </div>
 
