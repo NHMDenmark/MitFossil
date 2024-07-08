@@ -32,11 +32,11 @@ export default {
         },
         register: {
             title: 'Opret bruger',
-            text: 'For at kunne indsende fossiler til MitFossil og hjælpe med identifikation skal du oprette en bruger. Vælg et brugernavn og skriv din e-mailadresse. Når du klikker ‘Opret bruger’ vil du få tilsendt en engangskode til din e-mailadresse, som du skal bruge for at bekræfte din bruger.',
+            text: 'For at kunne indsende fossiler til MitFossil og hjælpe med identifikation skal du oprette en bruger. Vælg et brugernavn og skriv din e-mailadresse. Dit brugernavn må ikke være det samme som din e-mailadresse. Når du klikker ‘Opret bruger’ vil du få tilsendt en engangskode til din e-mailadresse, som du skal bruge for at bekræfte din bruger.',
             action: 'Opret bruger',
             profile_text: 'Har du allerede en bruger?',
             login_text: 'Log ind her',
-            accordion_title: 'Kort om adfærd og brugsret samt behandling af personoplysninger',
+            accordion_title: 'Klik her for at læse kort om adfærd og brugsret samt behandling af personoplysninger',
         },
         confirm_password: {
             title: 'Bekræft adgangskode',
@@ -63,7 +63,7 @@ export default {
         },
         confirm_register: {
             title: 'Bekræft din bruger',
-            text: 'Tak for din tilmelding! For at bekræfte din bruger skal du lige indtaste den engangskode, som vi har sendt i en e-mail til dig. Hvis du ikke har modtaget en e-mail, så tjek eventuelt din spam.',
+            text: 'Tak for din tilmelding! For at bekræfte din bruger skal du lige indtaste den engangskode, som vi har sendt i en e-mail til dig. Der kan godt gå et par minutter, før du modtager den. Hvis du ikke modtager en e-mail, sa tjek eventuelt din mappe med spam/uønsket mail.',
             action: 'Bekræft bruger med engangskode',
             label: 'Engangskode'
         },
