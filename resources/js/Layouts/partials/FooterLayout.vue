@@ -15,7 +15,7 @@
                                 <p><b>MitFossil</b> er udviklet af <a href="https://snm.ku.dk/" target="_blank">Statens Naturhistoriske Museum.</a></p>
                                 <p>Du kan finde en guide til, hvordan du bruger MitFossil <a href="https://mitfossil.dk/resources/guide" target="_blank">her.</a></p>
                                 <p><b>MitFossil </b> er finansieret af <a href="https://www.geocenter.dk/" target="_blank">Geocenter Danmark.</a></p>
-                                <p>Se mere om vores projekter og aktiviteter på: <a href="https://snm.dk/da/hjaelp-forskerne" target="_blank">snm.ku.dk/det-sker/citizen-science/</a></p>
+                                <p>Se mere om vores projekter og aktiviteter på: <a href="https://snm.dk/da/hjaelp-forskerne" target="_blank">snm.dk/da/hjaelp-forskerne</a></p>
                                 <p>Du kan finde kontaktoplysninger <a href="https://mitfossil.dk/resources/om-mitfossil/kontakt" target="_blank">her.</a></p>
                             </div>
                         </div>
