@@ -377,7 +377,7 @@ class NewFossilController extends Controller
         if(!$afterDot = Arr::get($explodedNumber, 1)) {
             return $number;
         } else {
-            return $explodedNumber[0] . '.' . substr($afterDot, 0, 3);
+            return $explodedNumber[0] . '.' . substr($afterDot, 0, 4);
         }
     }
 
@@ -401,8 +401,8 @@ class NewFossilController extends Controller
         $randomDigit1 = rand(0, 9);
         $randomDigit2 = rand(0, 9);
 
-        $afterDot[2] = $randomDigit1;
-        $afterDot[3] = $randomDigit2;
+        $afterDot[3] = $randomDigit1;
+        $afterDot[4] = $randomDigit2;
 
         $newNumberStr = $beforeDot . $afterDot;
 
