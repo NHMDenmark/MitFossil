@@ -12,7 +12,7 @@ import Editor from 'primevue/editor';
 import Modal from "@/Components/Modal.vue";
 import {ref} from "vue";
 
-defineProps({ messages: Array, sender: Object, receiver: Object, user: Object })
+const { messages, sender, receiver, thread, user } = defineProps({ messages: Array, sender: Object, receiver: Object, thread: Object, user: Object })
 
 const form = useForm({
     receiver_id: null,
@@ -62,16 +62,16 @@ const confirmAction = () => {
     <CustomerLayout>
         <div class="flex-content container-fluid p-3 p-md-45 bg-white-3">
             <div class="flex-column flex-xl-row gap-45 align-items-start">
-                <form @submit.prevent="form.post(route('threads.storeMessage', {thread: messages[0].thread.id}));" class="col bg-white border-light shadow rounded p-4 pt-5">
+                <form @submit.prevent="form.post(route('threads.storeMessage', {thread: thread.id}));" class="col bg-white border-light shadow rounded p-4 pt-5">
                     <div class="d-flex w-100 justify-content-between">
-                        <h2>{{ messages[0].thread.status == 'open' ? 'Send en besked i samtalen' : 'Læs samtalen' }}</h2>
+                        <h2>{{ thread.status == 'open' ? 'Send en besked i samtalen' : 'Læs samtalen' }}</h2>
                         <div class="d-flex">
                             <PrimaryButton class="align-self-end" style="margin-right: 10px;" type="link" :url="route('threads.index')">Tilbage</PrimaryButton>
-                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" style="margin-right: 10px;" type="button" @click="onDeleteClick(messages[0].thread.id, 'thread')">Slet samtalen</PrimaryButton>
-                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" type="link" :url="route('threads.change_status', {thread: messages[0].thread.id, status: messages[0].thread.status == 'closed' ? 'open' : 'closed'})">{{ messages[0].thread.status == 'closed' ? 'Åbn samtalen' : 'Luk samtalen' }}</PrimaryButton>
+                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" style="margin-right: 10px;" type="button" @click="onDeleteClick(thread.id, 'thread')">Slet samtalen</PrimaryButton>
+                            <PrimaryButton v-if="user.role == 'admin'" class="align-self-end" type="link" :url="route('threads.change_status', {thread: thread.id, status: thread.status == 'closed' ? 'open' : 'closed'})">{{ thread.status == 'closed' ? 'Åbn samtalen' : 'Luk samtalen' }}</PrimaryButton>
                         </div>
                     </div>
-                    <div class="col-12 mt-3" v-if="messages[0].thread.status == 'open'">
+                    <div class="col-12 mt-3" v-if="thread.status == 'open'">
                         <InputLabel class="mb-2" :value="'Besked'"></InputLabel>
 
                         <Editor v-model="form.text" editorStyle="height: 320px">
@@ -87,12 +87,12 @@ const confirmAction = () => {
                         </Editor>
                         <InputError class="mt-2" :message="form.errors.text" />
                     </div>
-                    <div class="col-12 mt-3 d-flex flex-column" v-if="messages[0].thread.status == 'open'">
+                    <div class="col-12 mt-3 d-flex flex-column" v-if="thread.status == 'open'">
                         <InputLabel class="mb-2" :value="'Vedhæftede filer'"></InputLabel>
 
                         <input type="file" name="attachments" id="attachments" multiple @change="manageAttachments"/>
                     </div>
-                    <PrimaryButton v-if="messages[0].thread.status == 'open'" class="mt-6 align-self-end" type="submit">Send</PrimaryButton>
+                    <PrimaryButton v-if="thread.status == 'open'" class="mt-6 align-self-end" type="submit">Send</PrimaryButton>
                 </form>
                 <div class="mt-4 flex-column flex-xl-row gap-45 align-items-start col bg-white border-light shadow rounded p-0 col-divider">
                     <div class="d-flex flex-column p-4" v-for="message in messages">
