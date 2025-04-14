@@ -109,12 +109,12 @@ function onBackClick() {
                         </div>
                     </div>
                     <div class="py-4 p-sm-4">
-                        <Images v-if="state === 0" :form="form" @continue="state = 1" @back="onBackClick" @save="save"></Images>
-                        <Location v-if="state === 1" :form="form" @continue="state = 2" @previous="state = 1" @back="onBackClick" @save="save"></Location>
-                        <GeologicalContext v-if="state === 2" :form="form" @continue="state = 3" @previous="state = 1" @back="onBackClick" @save="save"></GeologicalContext>
-                        <Dimensions v-if="state === 3" :form="form" @continue="state = 4" @previous="state = 2" @back="onBackClick" @save="save"></Dimensions>
-                        <Notes v-if="state === 4" :form="form" @continue="state = 5" @previous="state = 3" @back="onBackClick" @save="save"></Notes>
-                        <Summary v-if="state === 5" type="edit" :form="form" @continue="save" @previous="state = 4" @back="onBackClick" actionText="save"></Summary>
+                        <Images v-show="state === 0" :form="form" @continue="state = 1" @back="onBackClick" @save="save"></Images>
+                        <Location v-show="state === 1" :form="form" @continue="state = 2" @previous="state = 1" @back="onBackClick" @save="save"></Location>
+                        <GeologicalContext v-show="state === 2" :form="form" @continue="state = 3" @previous="state = 1" @back="onBackClick" @save="save"></GeologicalContext>
+                        <Dimensions v-show="state === 3" :form="form" @continue="state = 4" @previous="state = 2" @back="onBackClick" @save="save"></Dimensions>
+                        <Notes v-show="state === 4" :form="form" @continue="state = 5" @previous="state = 3" @back="onBackClick" @save="save"></Notes>
+                        <Summary v-show="state === 5" type="edit" :form="form" @continue="save" @previous="state = 4" @back="onBackClick" actionText="save"></Summary>
                     </div>
                 </div>
             </div>

@@ -87,7 +87,11 @@ async function loadFossil(params, page) {
         if(page) {
             fossils.value.current_page = result.current_page;
             fossils.value.next_page_url = result.next_page_url;
-            fossils.value.data = [ ...fossils.value.data, ...result.data ];
+            let resultData = {}
+            result.data.map(fossil => {
+                resultData[fossil.id] = fossil
+            })
+            fossils.value.data = [ ...fossils.value.data, ...resultData ];
         } else {
             fossils.value = result;
         }

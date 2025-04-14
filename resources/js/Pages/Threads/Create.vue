@@ -103,8 +103,15 @@ function manageAttachments(event) {
                     </div>
                     <div class="col-12 mt-3 d-flex flex-column">
                         <InputLabel class="mb-2" :value="'Vedhæftede filer'"></InputLabel>
-
-                        <input type="file" name="attachments" id="attachments" multiple @change="manageAttachments"/>
+                        <div class="d-flex flex-column gap-2">
+                            <div v-for="(attachment, index) in form.attachments">
+                                <InputLabel :value="attachment.name" />
+                                <svg @click="form.attachments.splice(index, 1)" style="cursor: pointer; margin-left: 10px; width: 15px; height: 15px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                        </div>
+                        <input style="margin-top: 20px;" type="file" name="attachments" id="attachments" multiple @change="manageAttachments"/>
                     </div>
                     <div class="button_container">
                         <PrimaryButton class="mt-6" style="margin-right: 10px" type="submit">Send</PrimaryButton>

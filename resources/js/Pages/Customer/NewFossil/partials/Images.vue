@@ -90,12 +90,12 @@ defineEmits(['continue', 'back', 'save']);
 
         <InputError class="mt-2" :message="form.errors.images" />
 
-        <div v-if="form.images_delete?.length > 0" class="row mt-3">
-            <div class="col-12">
-                <InputLabel for="motive_delete" :value="$t('form.motive_delete')" />
-                <textarea v-model="form.motive_delete" id="motive_delete" class="form-control mt-2" rows="5"></textarea>
-            </div>
-        </div>
+<!--        <div v-if="form.images_delete?.length > 0" class="row mt-3">-->
+<!--            <div class="col-12">-->
+<!--                <InputLabel for="motive_delete" :value="$t('form.motive_delete')" />-->
+<!--                <textarea v-model="form.motive_delete" id="motive_delete" class="form-control mt-2" rows="5"></textarea>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="row mt-3">
             <div class="col-12 d-flex justify-content-center flex-wrap gap-3">

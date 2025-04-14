@@ -69,7 +69,7 @@ class EMuseumController extends Controller
         }
 
         return Inertia::render('Customer/EMuseum/FossilExperts', compact(
-            'taxonomies', 'ages', 'search', 'origin', 'taxonomies_wizzard', 'curators', 'fossil', 'origin'
+            'taxonomies', 'ages', 'search', 'origin', 'taxonomies_wizzard', 'curators', 'fossil'
         ));
     }
 

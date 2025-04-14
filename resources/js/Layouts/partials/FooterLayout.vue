@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center justify-content-md-end px-0 ps-xl-5 footer-logo">
-                            <img src="/storage/images/kovbnhavns-universitet-logo.svg" class="object-fit-contain" alt="Kovbnhavns Universitet Logo"/>
+                            <img src="/storage/images/new_footer_logo.png" class="object-fit-contain" alt="Kovbnhavns Universitet Logo"/>
                         </div>
                     </div>
                 </div>

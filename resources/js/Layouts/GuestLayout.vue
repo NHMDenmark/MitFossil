@@ -9,15 +9,18 @@ import FooterLayout from "@/Layouts/partials/FooterLayout.vue";
         <nav class="navbar navbar-top navbar-expand-lg bg-white py-2 py-lg-3 fixed-top">
             <div class="container-fluid px-4 px-md-5">
                 <div class="navbar-container">
-                    <Link class="navbar-brand" :href="route('welcome')">
-                        <img class="img-fluid logo" src="/storage/images/mitfossil-logo.png" alt="MitFossil">
-                        <img class="img-fluid logo-text" src="/storage/images/mit-fossil-logo.svg" alt="MitFossil">
-                    </Link>
+                    <div class="navbar-text text-uppercase c-black fw-700 p-0" style="min-width: 214px;">
+                        <span class="header-text-logo">
+                            <!--{{ $t('layout.guest.title') }}-->
+                            <img class="img-fluid" src="/storage/images/new_header_logo.png" alt="STATENS NATURHISTORISKE MUSEUM">
+                        </span>
+                    </div>
+                    <a href="/" style="text-decoration: none !important; line-height: normal !important;" class="show-mobile fs-60 fw-300 c-green">MitFossil</a>
                     <div class="navbar-mobile-right">
                         <div class="navbar-text text-uppercase c-black fw-700 p-0">
                             <span class="header-text-logo">
                                 <!--{{ $t('layout.customer.title') }}-->
-                                <img class="img-fluid" src="/storage/images/SNM-logo.svg" alt="STATENS NATURHISTORISKE MUSEUM">
+<!--                                <img class="img-fluid" src="/storage/images/SNM-logo.svg" alt="STATENS NATURHISTORISKE MUSEUM">-->
                             </span>
                         </div>
                         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +30,8 @@ import FooterLayout from "@/Layouts/partials/FooterLayout.vue";
                         </button>
                     </div>
                 </div>
-                <div class="collapse navbar-collapse gap-5" id="navbarTop">
+                <a href="/" style="text-decoration: none !important; line-height: normal !important;" class="hide-mobile fs-60 fw-300 c-green">MitFossil</a>
+                <div class="gap-5 collapse mobile-nav" id="navbarTop">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3 gap-lg-4">
                         <template v-if="!$page.props.auth.user">
                             <nav-link :href="route('login')">{{ $t('layout.guest.login_text') }}</nav-link>
@@ -39,12 +43,6 @@ import FooterLayout from "@/Layouts/partials/FooterLayout.vue";
                             <nav-link :href="route('logout')" method="post" as="button"> {{ $t('layout.guest.logout_text') }} </nav-link>
                         </template>
                     </ul>
-                    <div class="navbar-text text-uppercase c-black fw-700 p-0">
-                        <span class="header-text-logo">
-                            <!--{{ $t('layout.guest.title') }}-->
-                            <img class="img-fluid" src="/storage/images/SNM-logo.svg" alt="STATENS NATURHISTORISKE MUSEUM">
-                        </span>
-                    </div>
                 </div>
             </div>
         </nav>
