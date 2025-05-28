@@ -87,11 +87,10 @@ async function loadFossil(params, page) {
         if(page) {
             fossils.value.current_page = result.current_page;
             fossils.value.next_page_url = result.next_page_url;
-            let resultData = {}
-            result.data.map(fossil => {
-                resultData[fossil.id] = fossil
-            })
-            fossils.value.data = [ ...fossils.value.data, ...resultData ];
+
+            const combinedData = [ ...fossils.value.data, ...result.data ];
+            const uniqueMap = new Map(combinedData.map(fossil => [fossil.id, fossil]));
+            fossils.value.data = Array.from(uniqueMap.values());
         } else {
             fossils.value = result;
         }

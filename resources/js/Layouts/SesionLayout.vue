@@ -6,7 +6,7 @@
             </div>
             <div class="col-12 col-md-7 min-h-screen-md d-flex flex-column justify-content-center align-items-center p-4 p-md-5">
                 <a class="flex" :href="link">
-                    <img class="img-fluid logo" src="/storage/images/mitfossil-logo.png">
+<!--                    <img class="img-fluid logo" src="/storage/images/mitfossil-logo.png">-->
                     <img class="img-fluid" src="/storage/images/mit-fossil-logo.svg">
                 </a>
                 <slot></slot>
