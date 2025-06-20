@@ -2,11 +2,44 @@
 import IconPage from '@/Components/Icons/IconPage.vue';
 import IconLogout from "@/Components/Icons/IconLogout.vue";
 import NavLink from '@/Components/NavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import {Link, useForm} from '@inertiajs/vue3';
 import FooterLayout from "@/Layouts/partials/FooterLayout.vue";
 import IconProfile from "@/Components/Icons/IconProfile.vue";
 import IconMap from "@/Components/Icons/IconMap.vue";
 import IconResource from "@/Components/Icons/IconResource.vue";
+import { ref } from "vue"
+import axios from 'axios';
+
+const form = useForm({
+  search: null
+});
+
+const timeout = ref();
+const searchGroups = ref({});
+const searchLoading = ref(false)
+
+const clearSearch = () => {
+  form.search = null
+  searchGroups.value = {}
+}
+
+const onSearch = async () => {
+  searchGroups.value = {}
+  searchLoading.value = true
+  clearTimeout(timeout.value)
+  timeout.value = setTimeout(async () => {
+    try {
+      const response = await axios.get('/api/admin/search', {params: {search: form.search}});
+      if (response.status === 200) {
+        searchGroups.value = response.data
+        searchLoading.value = false
+      }
+    } catch (error) {
+      console.error('Search failed', error);
+    }
+  }, 1000);
+}
+
 </script>
 
 <template>
@@ -60,6 +93,9 @@ import IconResource from "@/Components/Icons/IconResource.vue";
                         <div class="container-fluid p-0">
                             <div class="w-100" id="navbarSide">
                                 <ul class="navbar-nav">
+                                    <li>
+                                      <input @input="onSearch" class="search-input" id="admin_search" name="admin_search" v-model="form.search" placeholder="Søge">
+                                    </li>
                                     <NavLink :href="route('customer.dashboard')" :active="route().current('customer.dashboard')">
                                         <IconPage></IconPage>
                                         <span class="nav-text">{{ $t('layout.admin.dashboard_text') }}</span>
@@ -206,8 +242,63 @@ import IconResource from "@/Components/Icons/IconResource.vue";
 
                 <slot></slot>
             </div>
-
+            <div class="search-bar" v-if="form.search">
+              <div class="d-flex justify-content-between">
+                <h5>Search Results</h5>
+                <button @click="clearSearch" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="search-bar-group" v-if="!searchLoading && Object.values(searchGroups).filter(searchGroup => searchGroup.items.length > 0).length === 0">
+                <h6 style="border-bottom: 0 !important;">Resultater ikke fundet!</h6>
+              </div>
+              <div class="search-bar-group" v-show="searchGroup.items.length > 0" v-for="(searchGroup, groupSlug) in searchGroups" :key="groupSlug">
+                <h6>{{ searchGroup.name }}</h6>
+                <div class="search-bar-group-item" v-for="searchGroupItem in searchGroup.items">
+                  <Link :href="`/admin/${groupSlug}/${searchGroupItem.id}/edit`">
+                    {{ searchGroupItem[searchGroup.display_field] }}
+                  </Link>
+                </div>
+              </div>
+            </div>
             <FooterLayout></FooterLayout>
         </main>
     </div>
 </template>
+<style scoped>
+.search-input {
+  width: 95%;
+  margin-left: 2.5%;
+  border: 0;
+  padding: 0 10px;
+  height: 40px;
+}
+.search-bar {
+  position: fixed;
+  overflow-y: scroll;
+  top: 105px;
+  left: 260px;
+  width: 300px;
+  height: calc(100vh - 105px);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+}
+
+.search-bar h5 {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.search-bar h6 {
+  margin-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  border-bottom: 1px solid grey;
+}
+
+.search-bar-group-item {
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+</style>

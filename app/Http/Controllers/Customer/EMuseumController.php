@@ -91,4 +91,10 @@ class EMuseumController extends Controller
             'taxonomies', 'ages', 'search', 'origin', 'taxonomies_wizzard', 'curators', 'fossil', 'origin'
         ));
     }
+
+    public function show(int $id) {
+        $fossil = Fossil::getFossil($id);
+
+        return Inertia::render('Customer/Fossil/Index', compact('fossil'));
+    }
 }

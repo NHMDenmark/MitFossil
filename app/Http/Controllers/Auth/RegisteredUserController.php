@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'copyright_rule_id' => 'required',
         ]);
 
-        $otp = Str::random(20);
+        $otp = mt_rand(1000, 9999);
 
         $user = User::create([
             'username' => $request->username,
@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
         Mail::to($request->email)->send(new SendOTPMail($otp, $request->username, ''));
 
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
-        Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
+//        Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
 
         return redirect(route('register.confirm', $user->username));
     }

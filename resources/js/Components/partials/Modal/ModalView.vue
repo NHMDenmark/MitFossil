@@ -26,6 +26,7 @@ import { useI18n } from "vue-i18n";
 
 const modalView = ref();
 const modalConfirm = ref();
+const modalNotified = ref();
 const modalConfitmTitle = ref('');
 const modalConfitmText = ref('');
 let modalConfirmAction = '';
@@ -140,6 +141,7 @@ async function onNotify(curator) {
     }
 
     const result = await sendNotify(data);
+    modalNotified.value.show()
 }
 
 async function onReport2(option) {
@@ -251,6 +253,7 @@ async function onOkConfirm() {
                         <span v-if="fossil.vote_scientific">{{ $t('components.modal_view.scientific_validated') }}</span> <!-- Este voto solo lo hace el curator-->
                         <span v-if="fossil.vote_danekrae">{{ $t('components.modal_view.danekrae_validated') }}</span> <!-- Este voto solo lo hace el admin -->
                     </div>
+                    <a :href="`/fossil/${fossil.id}`">Åbn offentlig URL</a>
                 </div>
             </div>
             <div class="row mt-3 row-buttons row-buttons-popup">
@@ -345,6 +348,19 @@ async function onOkConfirm() {
                 </div>
             </div>
         </div>
+        </Modal>
+
+        <Modal
+            ref="modalNotified"
+            :show-cancel-button="true"
+            :textOkButton="$t('components.modal.accept')">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text-m">Den valgte kurator har nu modtaget din anmodning om hjælp. Kuratorerne er frivillige, så svartiden kan variere.</p>
+                    </div>
+                </div>
+            </div>
         </Modal>
 
     </Modal>

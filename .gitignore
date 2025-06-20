@@ -24,3 +24,4 @@ _ide_helper_models.php
 composer.lock
 package-lock.json
 phpMyAdmin/
+/.osp

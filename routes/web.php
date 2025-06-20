@@ -37,6 +37,7 @@ Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['questions']
     Route::get('/e-museum/scientific', [\App\Http\Controllers\Customer\EMuseumController::class, 'curated'])->name('e-museum.curated');
     Route::get('/e-museum/danekrae', [\App\Http\Controllers\Customer\EMuseumController::class, 'fossil_experts'])->name('e-museum.fossil_experts');
     Route::get('/fossil-catalogue', [\App\Http\Controllers\Customer\EMuseumController::class, 'map'])->name('e-museum.map');
+    Route::get('/fossil/{id}', [\App\Http\Controllers\Customer\EMuseumController::class, 'show'])->name('e-museum.show');
 });
 
 Route::group(['prefix' => '', 'as' => 'customer.', 'middleware' => ['auth', 'questions']], function () {

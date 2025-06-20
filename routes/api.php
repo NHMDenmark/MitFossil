@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'api.admin.', 'middleware' => ['auth:sanctum', 'role:admin']], function () {
+    Route::get('search', [\App\Http\Controllers\Api\Admin\SearchController::class, 'search'])->name('search');
     Route::post('/resources', [\App\Http\Controllers\Api\Admin\ResourcesController::class, 'store'])->name('resources.store');
     Route::post('/files', [\App\Http\Controllers\Api\Admin\FilesController::class, 'index'])->name('files');
 });

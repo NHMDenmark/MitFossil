@@ -50,6 +50,18 @@
         </div>
 
         <loading :show="loading"></loading>
+        <Modal
+            ref="modalNotified"
+            :show-cancel-button="true"
+            :textOkButton="$t('components.modal.accept')">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text-m">Den valgte kurator har nu modtaget din anmodning om hjælp. Kuratorerne er frivillige, så svartiden kan variere.</p>
+                    </div>
+                </div>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -64,9 +76,11 @@ import Wizard from "@/Components/Wizard.vue";
 import {sendNotify} from "@/Composables/useNotification";
 import {usePage} from "@inertiajs/vue3";
 import Loading from "@/Components/partials/Loading.vue";
+import Modal from "@/Components/Modal.vue";
 
 const fossils = ref({});
 const loading = ref(false);
+const modalNotified = ref()
 const store = useFilterStore();
 const user = usePage().props.auth.user;
 
@@ -153,6 +167,7 @@ async function onNotify(curator) {
     }
 
     const result = await sendNotify(data);
+    modalNotified.value.show()
 }
 
 const getTitle = (fossil) => {
