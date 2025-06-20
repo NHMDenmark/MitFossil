@@ -40,7 +40,7 @@ onMounted(() => {
                 <CardSearch :title="$t('pages.emuseum.fossil_title')" :origin="$page.props.origin"></CardSearch>
             </div>
             <div class="row mt-5">
-                <CardTable :origin="$page.props.origin"></CardTable>
+                <CardTable show-default="gallery" :origin="$page.props.origin"></CardTable>
             </div>
         </div>
 

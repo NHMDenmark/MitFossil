@@ -41,7 +41,7 @@ onMounted(() => {
             </div>
             <div class="row mt-5">
 
-                <CardTable :showMap="false" origin="identify"></CardTable>
+                <CardTable :showMap="false" show-default="gallery" origin="identify"></CardTable>
             </div>
         </div>
 

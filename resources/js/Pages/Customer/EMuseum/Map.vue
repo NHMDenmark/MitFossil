@@ -42,7 +42,7 @@ onMounted(() => {
             <div class="row mt-3">
                 <CardTable
                     :origin="$page.props.origin"
-                    show-default="map">
+                    show-default="gallery">
                 </CardTable>
             </div>
         </div>

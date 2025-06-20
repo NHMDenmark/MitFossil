@@ -9,7 +9,7 @@
                 <CardStats></CardStats>
             </div>
             <div class="row mt-5">
-                <CardTable origin="my-collection"></CardTable>
+                <CardTable show-default="gallery" origin="my-collection"></CardTable>
             </div>
         </div>
 
