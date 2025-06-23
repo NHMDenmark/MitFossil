@@ -40,7 +40,7 @@ class FossilRegionsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-region.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -71,13 +71,13 @@ class FossilRegionsController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_regions = FossilRegion::findOrFail($id);
         $fossil_regions->description = $request->description;
 
         $fossil_regions->save();
 
-        return Redirect::route('admin.fossil-region.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

@@ -46,7 +46,7 @@ class SpecificEpithetsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.specific-epithets.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -83,7 +83,7 @@ class SpecificEpithetsController extends Controller
 
         $specific_epithet->save();
 
-        return Redirect::route('admin.specific-epithets.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

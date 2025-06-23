@@ -41,7 +41,7 @@ class FossilSpecialiesController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-speciality.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -72,13 +72,13 @@ class FossilSpecialiesController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_speciality = FossilSpeciality::findOrFail($id);
         $fossil_speciality->description = $request->description;
 
         $fossil_speciality->save();
 
-        return Redirect::route('admin.fossil-speciality.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

@@ -49,7 +49,7 @@ class FossilCommonsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-commons.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -80,13 +80,13 @@ class FossilCommonsController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_common = FossilCommon::findOrFail($id);
         $fossil_common->description = $request->description;
 
         $fossil_common->save();
 
-        return Redirect::route('admin.fossil-commons.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

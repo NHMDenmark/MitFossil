@@ -42,7 +42,7 @@ const form = useForm({
 
                         <div class="row mt-3">
                             <div class="col-12 d-flex justify-content-end">
-                                <PrimaryButton class="me-2" type="link" :url="route('admin.fossil-commons.index')">{{ $t('form.back') }}</PrimaryButton>
+                                <PrimaryButton class="me-2" type="link" @click="window.history.back()">{{ $t('form.back') }}</PrimaryButton>
                                 <PrimaryButton type="submit" :disabled="form.processing">{{ $t('form.save') }}</PrimaryButton>
 
                                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">

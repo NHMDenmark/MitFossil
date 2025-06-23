@@ -40,7 +40,7 @@ class MapResourcesController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.map-resources.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     public function edit($id)
@@ -57,7 +57,7 @@ class MapResourcesController extends Controller
             'latitude' => 'required',
             'longitude' => 'required',
         ]);
-        
+
         $mapResource = MapResource::findOrFail($id);
         $mapResource->title= $request->title;
         $mapResource->text= $request->text;
@@ -66,7 +66,7 @@ class MapResourcesController extends Controller
 
         $mapResource->save();
 
-        return Redirect::route('admin.map-resources.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     public function destroy(Request $request)

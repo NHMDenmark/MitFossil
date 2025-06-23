@@ -48,7 +48,7 @@ class FossilGenresController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-genres.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -79,13 +79,13 @@ class FossilGenresController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_genre = FossilGenre::findOrFail($id);
         $fossil_genre->description = $request->description;
 
         $fossil_genre->save();
 
-        return Redirect::route('admin.fossil-genres.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

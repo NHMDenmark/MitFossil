@@ -48,7 +48,7 @@ class FossilOrdersController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-orders.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -79,13 +79,13 @@ class FossilOrdersController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_order = FossilOrder::findOrFail($id);
         $fossil_order->description = $request->description;
 
         $fossil_order->save();
 
-        return Redirect::route('admin.fossil-orders.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

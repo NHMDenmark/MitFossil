@@ -19,6 +19,10 @@ class CheckRole
             abort(403);
         }
 
+        if($request->method() == 'GET') {
+            session()->put('previous_previous_url', url()->previous());
+        }
+
         return $next($request);
     }
 }

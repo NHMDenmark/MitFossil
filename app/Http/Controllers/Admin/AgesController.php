@@ -49,7 +49,7 @@ class AgesController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.ages.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -82,13 +82,13 @@ class AgesController extends Controller
             'description' => 'required',
             'epoch_id' => 'required',
         ]);
-        
+
         $age = Age::findOrFail($id);
         $age->description = $request->description;
         $age->epoch_id = $request->epoch_id;
         $age->save();
 
-        return Redirect::route('admin.ages.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

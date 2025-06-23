@@ -48,7 +48,7 @@ class PeriodsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.periods.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -81,13 +81,13 @@ class PeriodsController extends Controller
             'description' => 'required',
             'era_id' => 'required',
         ]);
-        
+
         $period = Period::findOrFail($id);
         $period->description = $request->description;
         $period->era_id = $request->era_id;
         $period->save();
 
-        return Redirect::route('admin.periods.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

@@ -87,7 +87,7 @@ class FossilTaxonomiesController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-taxonomies.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -157,7 +157,7 @@ class FossilTaxonomiesController extends Controller
 
         $fossil_taxonomy->save();
 
-        return Redirect::route('admin.fossil-taxonomies.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

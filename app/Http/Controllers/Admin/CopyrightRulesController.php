@@ -39,14 +39,14 @@ class CopyrightRulesController  extends Controller
             'description' => 'required',
             'notes' => 'required',
         ]);
-                
+
         CopyrightRule::create([
             'description' => $request->description,
             'notes' => $request->notes,
             'active' => true
         ]);
 
-        return Redirect::route('admin.copyright-rules.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -64,7 +64,7 @@ class CopyrightRulesController  extends Controller
      */
     public function edit($id)
     {
-  
+
         $copyright_rule = CopyrightRule::findOrFail($id);
 
         return Inertia::render('Admin/CopyrightRules/Edit', compact('copyright_rule'));
@@ -79,14 +79,14 @@ class CopyrightRulesController  extends Controller
             'description' => 'required',
             'notes' => 'required',
         ]);
-        
+
         $copyright_rule = CopyrightRule::findOrFail($id);
         $copyright_rule->description = $request->description;
         $copyright_rule->notes = $request->notes;
 
         $copyright_rule->save();
 
-        return Redirect::route('admin.copyright-rules.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

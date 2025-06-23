@@ -48,7 +48,7 @@ class FossilKingdomsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-kingdoms.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -79,13 +79,13 @@ class FossilKingdomsController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_kingdom = FossilKingdom::findOrFail($id);
         $fossil_kingdom->description = $request->description;
 
         $fossil_kingdom->save();
 
-        return Redirect::route('admin.fossil-kingdoms.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

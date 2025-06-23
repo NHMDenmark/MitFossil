@@ -48,7 +48,7 @@ class EpochsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.epochs.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -81,13 +81,13 @@ class EpochsController extends Controller
             'description' => 'required',
             'period_id' => 'required',
         ]);
-        
+
         $epoch = Epoch::findOrFail($id);
         $epoch->description = $request->description;
         $epoch->period_id = $request->period_id;
         $epoch->save();
 
-        return Redirect::route('admin.epochs.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

@@ -42,7 +42,7 @@ class NewsController extends Controller
         $news->image = isset($urlImages) && is_array($urlImages) ? $urlImages[0] : $urlImages;
         $news->active = 1;
         $news->save();
-        return Redirect::route('admin.news.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -79,7 +79,7 @@ class NewsController extends Controller
 
         $news->save();
 
-        return Redirect::route('admin.news.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

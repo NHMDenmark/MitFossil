@@ -201,7 +201,7 @@ function onSubmit() {
                             <div class="col-12 d-flex justify-content-end flex-wrap gap-2">
                                 <PrimaryButton v-if="resource.id" type="link" :url="route('admin.resources.create') + `?resource_id=${ resource.id }`"> {{ $t('form.addchild') }}</PrimaryButton>
                                 <PrimaryButton v-if="resource.resource_id" type="link" :url="route('admin.resources.edit', resource.resource_id)"> {{ $t('form.back') }} </PrimaryButton>
-                                <PrimaryButton v-else type="link" :url="route('admin.resources.index')">{{ $t('form.back') }} </PrimaryButton>
+                                <PrimaryButton v-else type="link" @click="window.history.back()">{{ $t('form.back') }} </PrimaryButton>
                                 <PrimaryButton type="submit" :disabled="form.processing">{{ $t('form.save') }}</PrimaryButton>
 
                                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">

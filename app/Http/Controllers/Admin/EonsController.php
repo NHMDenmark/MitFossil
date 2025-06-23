@@ -44,7 +44,7 @@ class EonsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.eons.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -75,12 +75,12 @@ class EonsController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $eon = Eon::findOrFail($id);
         $eon->description = $request->description;
         $eon->save();
 
-        return Redirect::route('admin.eons.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

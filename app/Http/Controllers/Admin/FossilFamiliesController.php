@@ -48,7 +48,7 @@ class FossilFamiliesController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-families.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -79,13 +79,13 @@ class FossilFamiliesController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_family = FossilFamily::findOrFail($id);
         $fossil_family->description = $request->description;
 
         $fossil_family->save();
 
-        return Redirect::route('admin.fossil-families.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

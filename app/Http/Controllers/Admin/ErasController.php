@@ -49,7 +49,7 @@ class ErasController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.eras.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -82,13 +82,13 @@ class ErasController extends Controller
             'description' => 'required',
             'eon_id' => 'required',
         ]);
-        
+
         $era = Era::findOrFail($id);
         $era->description = $request->description;
         $era->eon_id = $request->eon_id;
         $era->save();
 
-        return Redirect::route('admin.eras.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

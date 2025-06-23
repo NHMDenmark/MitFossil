@@ -40,7 +40,9 @@ class CustomerController extends Controller
             'answered_questions' => true
         ]);
 
-        return Redirect::route('admin.customer.index');
+        info(session()->pull('previous_previous_url'));
+
+        return Redirect::to(session()->pull('previous_previous_url', route('admin.customer.index')));
     }
 
     function edit($id) {
@@ -63,7 +65,7 @@ class CustomerController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.customer.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     function destroy(Request $request){

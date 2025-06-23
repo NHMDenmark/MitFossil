@@ -128,7 +128,7 @@ class ResourcesController extends Controller
             return Redirect::route('admin.resources.edit', $id);
         }
 
-        return Redirect::route('admin.resources.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

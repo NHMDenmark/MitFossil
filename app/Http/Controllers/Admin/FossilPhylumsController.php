@@ -48,7 +48,7 @@ class FossilPhylumsController extends Controller
             'active' => true
         ]);
 
-        return Redirect::route('admin.fossil-phylums.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**
@@ -79,13 +79,13 @@ class FossilPhylumsController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        
+
         $fossil_phylum = FossilPhylum::findOrFail($id);
         $fossil_phylum->description = $request->description;
 
         $fossil_phylum->save();
 
-        return Redirect::route('admin.fossil-phylums.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     /**

@@ -44,7 +44,7 @@ class FilesController extends Controller
             ]);
         }
 
-        return Redirect::route('admin.files.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     public function edit(Request $request, $id) {
@@ -82,7 +82,7 @@ class FilesController extends Controller
             $model->save();
         }
 
-        return Redirect::route('admin.files.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     public function destroy(Request $request)

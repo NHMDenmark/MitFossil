@@ -41,7 +41,7 @@ class UsersController extends Controller
             'answered_questions' => true
         ]);
 
-        return Redirect::route('admin.users.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     function edit($id) {
@@ -65,7 +65,7 @@ class UsersController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.users.index');
+        return Redirect::to(session()->pull('previous_previous_url'));
     }
 
     function destroy(Request $request){
