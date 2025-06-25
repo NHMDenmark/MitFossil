@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(ImageRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'username' => 'required|string|max:32|unique:'.User::class,
@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
         Mail::to($request->email)->send(new SendOTPMail($otp, $request->username, ''));
 
         $admin_text = 'User with username ' . $request->username . ' was registered using email ' . $request->email;
-//        Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
+        Mail::to('mitfossil@snm.ku.dk')->send(new SendOTP(['body' => $admin_text], 'User-email relation'));
 
         return redirect(route('register.confirm', $user->username));
     }

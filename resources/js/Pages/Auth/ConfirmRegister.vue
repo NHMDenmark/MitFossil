@@ -8,6 +8,7 @@ import InputError from "@/Components/InputError.vue";
 const props = defineProps({
     status: {type: String},
     username: {type: String},
+    errors: {type: Object},
 
 });
 
@@ -40,7 +41,6 @@ const submit = () => {
 };
 
 const goToNextInput = (index) => {
-    console.log(index, firstDigit.value)
     if (index === 'first' && firstDigit.value) {
         secondDigitInput.value.focus();
     } else if (index === 'second' && firstDigit.value) {
@@ -114,13 +114,13 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
                        autocomplete="off">
             </div>
             <div class="d-flex justify-content-center">
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError class="text-center mt-2" :message="form.errors.username" />
             </div>
-            <div class="d-flex justify-content-center mt-4">
-                <button class="rounded text-uppercase btn-mit" type="submit">
-                    {{ $t('pages.confirm_register.action') }}
-                </button>
-            </div>
+<!--            <div class="d-flex justify-content-center mt-4">-->
+<!--                <button class="rounded text-uppercase btn-mit" type="submit">-->
+<!--                    {{ $t('pages.confirm_register.action') }}-->
+<!--                </button>-->
+<!--            </div>-->
         </form>
 
     </SesionLayout>

@@ -36,6 +36,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(Auth::guest()) {
+            return redirect()->back()->withErrors(['password' => 'asd']);
+        }
+
         $redirect = Functions::getRedirect($request);
 
         return redirect()->intended($redirect);
