@@ -253,7 +253,7 @@ async function onOkConfirm() {
                         <span v-if="fossil.vote_scientific">{{ $t('components.modal_view.scientific_validated') }}</span> <!-- Este voto solo lo hace el curator-->
                         <span v-if="fossil.vote_danekrae">{{ $t('components.modal_view.danekrae_validated') }}</span> <!-- Este voto solo lo hace el admin -->
                     </div>
-                    <a :href="`/fossil/${fossil.id}`">Åbn offentlig URL</a>
+                    <a :href="`/fossil/${fossil.id}`">Åbn som link</a>
                 </div>
             </div>
             <div class="row mt-3 row-buttons row-buttons-popup">

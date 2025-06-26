@@ -28,11 +28,13 @@
                     </div>
                 </div>
 
-
+                <Identifies :fossil="fossil"></Identifies>
 
                 <Transition name="slide-fade">
                     <NewSuggest v-if="showNewIdentify" :fossil="fossil" :data="identify_data" @close="showNewIdentify = false"></NewSuggest>
                 </Transition>
+
+                <Comments :comments="fossil.fossil_comments" :fossil="fossil"></Comments>
 
                 <div class="fossil-details row mt-3">
                     <div class="col-12 col-lg-6">
