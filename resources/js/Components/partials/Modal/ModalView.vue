@@ -353,11 +353,11 @@ async function onOkConfirm() {
         <Modal
             ref="modalNotified"
             :show-cancel-button="true"
-            :textOkButton="$t('components.modal.accept')">
+            textOkButton="OK">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <p class="text-m">Den valgte kurator har nu modtaget din anmodning om hjælp. Kuratorerne er frivillige, så svartiden kan variere.</p>
+                        <p class="text-m">Den valgte kurator har nu modtaget din anmodning om hjælp. Kuratorerne er frivillige, så svartiden kan variere. Kuratorerne er også eksperter på hvert deres område, så de kan ikke nødvendigvis hjælpe med alle anmodninger.</p>
                     </div>
                 </div>
             </div>

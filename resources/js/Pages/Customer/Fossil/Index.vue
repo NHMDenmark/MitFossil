@@ -1,6 +1,6 @@
 <template>
     <Head :title="`Fossil #${fossil.id}`" />
-    <GuestLayout>
+    <CustomerLayout>
         <div class="fossil-container">
             <div v-if="fossil.id" class="container-fluid">
                 <div class="row">
@@ -72,17 +72,17 @@
             <Modal
                 ref="modalNotified"
                 :show-cancel-button="true"
-                :textOkButton="$t('components.modal.accept')">
+                textOkButton="OK">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <p class="text-m">Den valgte kurator har nu modtaget din anmodning om hjælp. Kuratorerne er frivillige, så svartiden kan variere.</p>
+                            <p class="text-m">Den valgte kurator har nu modtaget din anmodning om hjælp. Kuratorerne er frivillige, så svartiden kan variere. Kuratorerne er også eksperter på hvert deres område, så de kan ikke nødvendigvis hjælpe med alle anmodninger.</p>
                         </div>
                     </div>
                 </div>
             </Modal>
         </div>
-    </GuestLayout>
+    </CustomerLayout>
 </template>
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -108,7 +108,7 @@ import {Head, useForm, usePage} from "@inertiajs/vue3";
 import {useI18n} from "vue-i18n";
 import {active_fossil, desactive_fossil, getIdentifyData, getUserVotes} from "@/Composables/useFossil";
 import {sendNotify, sendReport} from "@/Composables/useNotification";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import CustomerLayout from "@/Layouts/CustomerLayout.vue";
 
 
 const modalView = ref();
