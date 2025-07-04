@@ -1,55 +1,133 @@
-## Command line instructions
+# Project Setup Documentation
 
-#### Requires
+## Prerequisites
 
-- NodeJs: https://nodejs.org/en
-- Composer: https://getcomposer.org/download/
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL
 
-#### Git global setup
+## Initial Setup
 
-```
-git config --global user.name "name and lastname"
-git config --global user.email "email"
-```
+### Laravel Installation
 
-#### Clone
+1. Clone project:
 
-```
-git clone https://gitlab.com/rainbowriders/dev.mitfossil.dk.git
-```
+    ```bash
+    git clone git@github.com:NHMDenmark/MitFossil.git
+    ```
 
-#### Project setup
+2. Install backend packages:
 
-```
-cd dev.mitfossil.dk.git
+    ```bash
+    composer install
+    ```
+
+3. Configure environment file:
+
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+4. Set up database connection in .env file:
+
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database
+    DB_USERNAME=your_username
+    DB_PASSWORD=your_password
+    ```
+
+
+### Vue.js Setup
+
+1. Install Vue and dependencies:
+
+    ```bash
+    npm install
+    ```
+
+
+## Project Structure
+
+- Frontend Vue components: `resources/js/`
+- Backend Laravel controllers: `app/Http/Controllers/`
+- API routes: `routes/api.php`
+- Web routes: `routes/web.php`
+- Auth routes: `routes/auth.php`
+
+## Development Workflow
+
+1. Start Laravel development server:
+
+    ```bash
+    php artisan serve
+    ```
+
+2. Compile and hot-reload assets:
+
+    ```bash
+    npm run dev
+    ```
+
+
+## Deployment Steps
+
+1. Add .htaccess in the root directory (for Apache only):
+
+    ```bash
+    <IfModule mod_rewrite.c>
+        RewriteEngine on
+        RewriteCond %{REQUEST_URI} !^public
+        RewriteRule ^(.*)$ public/$1 [L]
+    </IfModule>
+    ```
+
+2. Build production assets:
+
+    ```bash
+    npm run build
+    ```
+
+3. Setup database with default data:
+
+    ```bash
+    php artisan migrate
+    php artisan db:seed
+    ```
+
+4. Create symlinks for storage:
+
+    ```bash
+    php artisan storage:link
+    ```
+
+5. Optimize Laravel:
+
+    ```bash
+    php artisan optimize
+    php artisan config:cache
+    php artisan route:cache
+    ```
+
+
+## Additional Resources
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Vue.js Documentation](https://vuejs.org/guide/introduction.html)
+- [Vite Documentation](https://vitejs.dev/guide/)
+
+<aside>
+Remember to regularly update dependencies and check for security vulnerabilities using:
+
+```bash
 composer update
-npm install
-```
-- <p> <b>composer update</b> for download laravel dependencies  </p>
-- <p> <b>npm install</b> for downlaod vueJs dependencies  </p>
-
-#### Configure database
-
-- <p>Copy file <b>.env.example</b> to <b>.env</b></p>
-- Change next values if required:
-  - APP_KEY=base64:5+PpH9KfNxQwdgxDKyIQKR8LY1Mvkds5SEb7F7/t40w=
-  - DB_HOST=127.0.0.1
-  - DB_PORT=3306
-  - DB_DATABASE=database_name_db
-  - DB_USERNAME=
-  - DB_PASSWORD=
-- Run next command line
-
-```
-php artisan migrate
+npm update
+composer audit
+npm audit
 ```
 
-#### Run project
-
-```
-php artisan serve
-npm run dev
-```
-
-- <p> <b>artisan serve</b> for run backend project  </p>
-- <p> <b>npm run dev</b> for run frontend project  </p>
+</aside>
